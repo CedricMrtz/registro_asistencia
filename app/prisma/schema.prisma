@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model Simposium {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.NVarChar(255)
+  createdAt DateTime @default(now())
+
+  events    Event[]
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.NVarChar(255)
+  simposiumId Int
+  simposium   Simposium @relation(fields: [simposiumId], references: [id])
+  createdAt   DateTime  @default(now())
+
+  assistances Assistance[]
+}
+
+model Student {
+  id          Int          @id @default(autoincrement())
+  matricula   String       @unique @db.NVarChar(20)
+  name        String       @db.NVarChar(255)
+
+  assistances Assistance[]
+}
+
+model Assistance {
+  id        Int      @id @default(autoincrement())
+  type      String   @db.NVarChar(10)
+  eventId   Int
+  studentId Int
+  createdAt DateTime @default(now())
+
+  event     Event   @relation(fields: [eventId], references: [id])
+  student   Student @relation(fields: [studentId], references: [id])
+
+  @@unique([eventId, studentId, type])
+}
