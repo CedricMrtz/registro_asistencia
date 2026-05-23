@@ -1,0 +1,1 @@
+export { MatriculaInput } from "./MatriculaInput";
