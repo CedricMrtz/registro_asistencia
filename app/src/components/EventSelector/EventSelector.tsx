@@ -29,8 +29,8 @@ export function EventSelector({
       >
         <option value="">Seleccionar evento...</option>
         {events.map((eventItem) => (
-          <option key={eventItem.id} value={eventItem.id}>
-            {eventItem.name}
+          <option key={eventItem.idEvento} value={eventItem.idEvento}>
+            {eventItem.nombreEvento}
           </option>
         ))}
       </select>

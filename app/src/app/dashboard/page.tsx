@@ -35,11 +35,11 @@ export default function DashboardPage() {
   } = useAssistances();
 
   const selectedSimposium = useMemo(
-    () => simposiums.find((item) => item.id === simposiumId) ?? null,
+    () => simposiums.find((item) => item.idSimposium === simposiumId) ?? null,
     [simposiums, simposiumId]
   );
 
-  const events = useMemo(() => selectedSimposium?.events ?? [], [selectedSimposium]);
+  const events = useMemo(() => selectedSimposium?.Evento ?? [], [selectedSimposium]);
 
   useEffect(() => {
     let isMounted = true;

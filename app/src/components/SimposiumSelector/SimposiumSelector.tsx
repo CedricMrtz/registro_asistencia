@@ -26,8 +26,8 @@ export function SimposiumSelector({
       >
         <option value="">Seleccionar simposio...</option>
         {simposiums.map((simposium) => (
-          <option key={simposium.id} value={simposium.id}>
-            {simposium.name}
+          <option key={simposium.idSimposium} value={simposium.idSimposium}>
+            {simposium.nombre}
           </option>
         ))}
       </select>

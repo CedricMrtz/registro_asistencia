@@ -1,11 +1,18 @@
 export interface Event {
-  id: number;
-  name: string;
-  simposiumId: number;
+  idEvento: number;
+  nombreEvento: string;
+  fecha_comienzo: Date;
+  fecha_acabado: Date;
+  idSimposium: number;
+  nombreTipo: string;
 }
 
 export interface Simposium {
-  id: number;
-  name: string;
-  events: Event[];
+  idSimposium: number;
+  nombre: string;
+  fecha_comienzo: Date;
+  fecha_acabado: Date;
+  capacidad_asistentes: number;
+  adminID: number;
+  Evento: Event[];
 }
