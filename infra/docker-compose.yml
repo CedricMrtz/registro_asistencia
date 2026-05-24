@@ -1,0 +1,65 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_bd
+    restart: unless-stopped
+
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+
+    ports:
+      - "1433:1433"
+
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+      - ./sqlserver/backups:/backups
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\""
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  migrator:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: sqlserver_migrator
+
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+    volumes:
+      - ./sqlserver/init:/migrations
+      - ./sqlserver/scripts:/scripts
+
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+
+    command: /bin/bash /scripts/run-migrations.sh
+
+  backup:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: sqlserver_backup
+    restart: unless-stopped
+
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+    volumes:
+      - ./sqlserver/backups:/backups
+      - ./sqlserver/scripts:/scripts
+
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+
+    command: /bin/bash /scripts/backup.sh
+
+volumes:
+  sqlserver_data:

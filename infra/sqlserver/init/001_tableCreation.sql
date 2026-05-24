@@ -2,6 +2,7 @@ CREATE DATABASE Simposium;
 GO
  
 USE Simposium;
+GO
 
 CREATE TABLE Escuela (
     nombre_escuela VARCHAR(100) NOT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE Alumno (
         REFERENCES Carrera(nombre_carrera)
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT CK_Alumno_Semestre CHECK (semestre BETWEEN 1 AND 8),
+    CONSTRAINT CK_Alumno_Semestre CHECK (semestre BETWEEN 1 AND 8)
 );
 
 CREATE TABLE Admin (
@@ -47,7 +48,7 @@ CREATE TABLE Admin (
     email VARCHAR(150) NOT NULL,
  
     CONSTRAINT PK_Admin PRIMARY KEY (adminID),
-    CONSTRAINT UQ_Admin_Email UNIQUE (email),
+    CONSTRAINT UQ_Admin_Email UNIQUE (email)
 );
 
 CREATE TABLE Simposium (
@@ -114,7 +115,7 @@ CREATE TABLE Evento (
     CONSTRAINT FK_Evento_TipoEvento FOREIGN KEY (nombreTipo)
         REFERENCES TipoEvento(nombreTipo)
         ON UPDATE CASCADE
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 
