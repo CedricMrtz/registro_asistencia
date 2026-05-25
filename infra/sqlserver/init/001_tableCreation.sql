@@ -133,3 +133,20 @@ CREATE TABLE AlumnoInscritoSimposium (
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
+
+CREATE TABLE AlumnoAsistioEvento (
+    matricula VARCHAR(15) NOT NULL,
+    idEvento INT NOT NULL,
+    fecha_llegada DATETIME NOT NULL,
+    fecha_salida DATETIME NULL,
+
+    CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (matricula, idEvento),
+    CONSTRAINT FK_AlumnoAsistio_Alumno FOREIGN KEY (matricula)
+        REFERENCES Alumno(matricula)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT FK_AlumnoAsistio_Evento FOREIGN KEY (idEvento)
+        REFERENCES Evento(idEvento)
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+);
