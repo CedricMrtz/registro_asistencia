@@ -1,3 +1,6 @@
+USE Simposium;
+GO
+
 INSERT INTO Escuela (nombre_escuela, ciudad) VALUES
 ('Instituto Tecnológico de Mexicali',    'Mexicali'),
 ('Universidad Autónoma de Baja California', 'Tijuana'),
