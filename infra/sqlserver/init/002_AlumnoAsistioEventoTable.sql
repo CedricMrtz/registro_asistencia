@@ -2,13 +2,14 @@ USE Simposium;
 GO
 
 CREATE TABLE AlumnoAsistioEvento (
+    idAsistencia INT IDENTITY(1,1) NOT NULL,
     matricula VARCHAR(15) NOT NULL,
     idEvento INT NOT NULL,
     fecha_llegada DATETIME NOT NULL,
     fecha_salida DATETIME NULL,
     staffID INT NULL,
 
-    CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (matricula, idEvento),
+    CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (idAsistencia),
 
     CONSTRAINT FK_AlumnoAsistio_Alumno 
         FOREIGN KEY (matricula)
@@ -29,3 +30,7 @@ CREATE TABLE AlumnoAsistioEvento (
         ON DELETE CASCADE
 );
 GO
+
+CREATE INDEX IX_AlumnoEvento ON AlumnoAsistioEvento(matricula, idEvento);
+GO
+
