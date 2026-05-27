@@ -10,7 +10,7 @@ CREATE TABLE AlumnoAsistioEvento (
     staffID INT NULL,
 
     CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (idAsistencia),
-
+    
     CONSTRAINT FK_AlumnoAsistio_Alumno 
         FOREIGN KEY (matricula)
         REFERENCES Alumno(matricula)
