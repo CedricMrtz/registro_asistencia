@@ -32,3 +32,7 @@ CREATE TABLE AlumnoAsistioEvento (
         ON DELETE CASCADE
 );
 GO
+
+CREATE INDEX IX_AlumnoEvento ON AlumnoAsistioEvento(matricula, idEvento);
+GO
+
