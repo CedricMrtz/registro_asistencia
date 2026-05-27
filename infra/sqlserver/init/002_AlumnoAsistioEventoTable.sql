@@ -6,6 +6,7 @@ CREATE TABLE AlumnoAsistioEvento (
     idEvento INT NOT NULL,
     fecha_llegada DATETIME NOT NULL,
     fecha_salida DATETIME NULL,
+    staffID INT NULL,
 
     CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (matricula, idEvento),
 
@@ -18,6 +19,12 @@ CREATE TABLE AlumnoAsistioEvento (
     CONSTRAINT FK_AlumnoAsistio_Evento 
         FOREIGN KEY (idEvento)
         REFERENCES Evento(idEvento)
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+
+    CONSTRAINT FK_AlumnoAsistio_Staff 
+        FOREIGN KEY (staffID)
+        REFERENCES Staff(staffID)
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
