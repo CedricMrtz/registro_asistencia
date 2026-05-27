@@ -9,7 +9,6 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Simposium'
-export type * from './models/Admin'
 export type * from './models/Alumno'
 export type * from './models/AlumnoInscritoSimposium'
 export type * from './models/Carrera'
@@ -18,4 +17,6 @@ export type * from './models/Evento'
 export type * from './models/Staff'
 export type * from './models/StaffTrabajaEnSimposium'
 export type * from './models/TipoEvento'
+export type * from './models/AdminSimposium'
+export type * from './models/AlumnoAsistioEvento'
 export type * from './commonInputTypes'

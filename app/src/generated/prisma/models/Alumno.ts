@@ -225,6 +225,7 @@ export type AlumnoWhereInput = {
   email?: Prisma.StringFilter<"Alumno"> | string
   nombre_carrera?: Prisma.StringFilter<"Alumno"> | string
   Carrera?: Prisma.XOR<Prisma.CarreraScalarRelationFilter, Prisma.CarreraWhereInput>
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoListRelationFilter
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumListRelationFilter
 }
 
@@ -236,6 +237,7 @@ export type AlumnoOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   nombre_carrera?: Prisma.SortOrder
   Carrera?: Prisma.CarreraOrderByWithRelationInput
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoOrderByRelationAggregateInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumOrderByRelationAggregateInput
 }
 
@@ -250,6 +252,7 @@ export type AlumnoWhereUniqueInput = Prisma.AtLeast<{
   semestre?: Prisma.IntFilter<"Alumno"> | number
   nombre_carrera?: Prisma.StringFilter<"Alumno"> | string
   Carrera?: Prisma.XOR<Prisma.CarreraScalarRelationFilter, Prisma.CarreraWhereInput>
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoListRelationFilter
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumListRelationFilter
 }, "matricula" | "email">
 
@@ -286,6 +289,7 @@ export type AlumnoCreateInput = {
   semestre: number
   email: string
   Carrera: Prisma.CarreraCreateNestedOneWithoutAlumnoInput
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutAlumnoInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutAlumnoInput
 }
 
@@ -296,6 +300,7 @@ export type AlumnoUncheckedCreateInput = {
   semestre: number
   email: string
   nombre_carrera: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutAlumnoInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutAlumnoInput
 }
 
@@ -306,6 +311,7 @@ export type AlumnoUpdateInput = {
   semestre?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   Carrera?: Prisma.CarreraUpdateOneRequiredWithoutAlumnoNestedInput
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutAlumnoNestedInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUpdateManyWithoutAlumnoNestedInput
 }
 
@@ -316,6 +322,7 @@ export type AlumnoUncheckedUpdateInput = {
   semestre?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_carrera?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutAlumnoNestedInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedUpdateManyWithoutAlumnoNestedInput
 }
 
@@ -455,6 +462,20 @@ export type AlumnoUncheckedUpdateManyWithoutCarreraNestedInput = {
   deleteMany?: Prisma.AlumnoScalarWhereInput | Prisma.AlumnoScalarWhereInput[]
 }
 
+export type AlumnoCreateNestedOneWithoutAlumnoAsistioEventoInput = {
+  create?: Prisma.XOR<Prisma.AlumnoCreateWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  connectOrCreate?: Prisma.AlumnoCreateOrConnectWithoutAlumnoAsistioEventoInput
+  connect?: Prisma.AlumnoWhereUniqueInput
+}
+
+export type AlumnoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput = {
+  create?: Prisma.XOR<Prisma.AlumnoCreateWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  connectOrCreate?: Prisma.AlumnoCreateOrConnectWithoutAlumnoAsistioEventoInput
+  upsert?: Prisma.AlumnoUpsertWithoutAlumnoAsistioEventoInput
+  connect?: Prisma.AlumnoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AlumnoUpdateToOneWithWhereWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUpdateWithoutAlumnoAsistioEventoInput>, Prisma.AlumnoUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+}
+
 export type AlumnoCreateWithoutAlumnoInscritoSimposiumInput = {
   matricula: string
   nombre: string
@@ -462,6 +483,7 @@ export type AlumnoCreateWithoutAlumnoInscritoSimposiumInput = {
   semestre: number
   email: string
   Carrera: Prisma.CarreraCreateNestedOneWithoutAlumnoInput
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutAlumnoInput
 }
 
 export type AlumnoUncheckedCreateWithoutAlumnoInscritoSimposiumInput = {
@@ -471,6 +493,7 @@ export type AlumnoUncheckedCreateWithoutAlumnoInscritoSimposiumInput = {
   semestre: number
   email: string
   nombre_carrera: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutAlumnoInput
 }
 
 export type AlumnoCreateOrConnectWithoutAlumnoInscritoSimposiumInput = {
@@ -496,6 +519,7 @@ export type AlumnoUpdateWithoutAlumnoInscritoSimposiumInput = {
   semestre?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   Carrera?: Prisma.CarreraUpdateOneRequiredWithoutAlumnoNestedInput
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutAlumnoNestedInput
 }
 
 export type AlumnoUncheckedUpdateWithoutAlumnoInscritoSimposiumInput = {
@@ -505,6 +529,7 @@ export type AlumnoUncheckedUpdateWithoutAlumnoInscritoSimposiumInput = {
   semestre?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_carrera?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutAlumnoNestedInput
 }
 
 export type AlumnoCreateWithoutCarreraInput = {
@@ -513,6 +538,7 @@ export type AlumnoCreateWithoutCarreraInput = {
   telefono?: string | null
   semestre: number
   email: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutAlumnoInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutAlumnoInput
 }
 
@@ -522,6 +548,7 @@ export type AlumnoUncheckedCreateWithoutCarreraInput = {
   telefono?: string | null
   semestre: number
   email: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutAlumnoInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutAlumnoInput
 }
 
@@ -562,6 +589,62 @@ export type AlumnoScalarWhereInput = {
   nombre_carrera?: Prisma.StringFilter<"Alumno"> | string
 }
 
+export type AlumnoCreateWithoutAlumnoAsistioEventoInput = {
+  matricula: string
+  nombre: string
+  telefono?: string | null
+  semestre: number
+  email: string
+  Carrera: Prisma.CarreraCreateNestedOneWithoutAlumnoInput
+  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutAlumnoInput
+}
+
+export type AlumnoUncheckedCreateWithoutAlumnoAsistioEventoInput = {
+  matricula: string
+  nombre: string
+  telefono?: string | null
+  semestre: number
+  email: string
+  nombre_carrera: string
+  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutAlumnoInput
+}
+
+export type AlumnoCreateOrConnectWithoutAlumnoAsistioEventoInput = {
+  where: Prisma.AlumnoWhereUniqueInput
+  create: Prisma.XOR<Prisma.AlumnoCreateWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+}
+
+export type AlumnoUpsertWithoutAlumnoAsistioEventoInput = {
+  update: Prisma.XOR<Prisma.AlumnoUpdateWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+  create: Prisma.XOR<Prisma.AlumnoCreateWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  where?: Prisma.AlumnoWhereInput
+}
+
+export type AlumnoUpdateToOneWithWhereWithoutAlumnoAsistioEventoInput = {
+  where?: Prisma.AlumnoWhereInput
+  data: Prisma.XOR<Prisma.AlumnoUpdateWithoutAlumnoAsistioEventoInput, Prisma.AlumnoUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+}
+
+export type AlumnoUpdateWithoutAlumnoAsistioEventoInput = {
+  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  semestre?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  Carrera?: Prisma.CarreraUpdateOneRequiredWithoutAlumnoNestedInput
+  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUpdateManyWithoutAlumnoNestedInput
+}
+
+export type AlumnoUncheckedUpdateWithoutAlumnoAsistioEventoInput = {
+  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  semestre?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre_carrera?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedUpdateManyWithoutAlumnoNestedInput
+}
+
 export type AlumnoCreateManyCarreraInput = {
   matricula: string
   nombre: string
@@ -576,6 +659,7 @@ export type AlumnoUpdateWithoutCarreraInput = {
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semestre?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutAlumnoNestedInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUpdateManyWithoutAlumnoNestedInput
 }
 
@@ -585,6 +669,7 @@ export type AlumnoUncheckedUpdateWithoutCarreraInput = {
   telefono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semestre?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutAlumnoNestedInput
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedUpdateManyWithoutAlumnoNestedInput
 }
 
@@ -602,10 +687,12 @@ export type AlumnoUncheckedUpdateManyWithoutCarreraInput = {
  */
 
 export type AlumnoCountOutputType = {
+  AlumnoAsistioEvento: number
   AlumnoInscritoSimposium: number
 }
 
 export type AlumnoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AlumnoAsistioEvento?: boolean | AlumnoCountOutputTypeCountAlumnoAsistioEventoArgs
   AlumnoInscritoSimposium?: boolean | AlumnoCountOutputTypeCountAlumnoInscritoSimposiumArgs
 }
 
@@ -617,6 +704,13 @@ export type AlumnoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the AlumnoCountOutputType
    */
   select?: Prisma.AlumnoCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AlumnoCountOutputType without action
+ */
+export type AlumnoCountOutputTypeCountAlumnoAsistioEventoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AlumnoAsistioEventoWhereInput
 }
 
 /**
@@ -635,6 +729,7 @@ export type AlumnoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   email?: boolean
   nombre_carrera?: boolean
   Carrera?: boolean | Prisma.CarreraDefaultArgs<ExtArgs>
+  AlumnoAsistioEvento?: boolean | Prisma.Alumno$AlumnoAsistioEventoArgs<ExtArgs>
   AlumnoInscritoSimposium?: boolean | Prisma.Alumno$AlumnoInscritoSimposiumArgs<ExtArgs>
   _count?: boolean | Prisma.AlumnoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["alumno"]>
@@ -653,6 +748,7 @@ export type AlumnoSelectScalar = {
 export type AlumnoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"matricula" | "nombre" | "telefono" | "semestre" | "email" | "nombre_carrera", ExtArgs["result"]["alumno"]>
 export type AlumnoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Carrera?: boolean | Prisma.CarreraDefaultArgs<ExtArgs>
+  AlumnoAsistioEvento?: boolean | Prisma.Alumno$AlumnoAsistioEventoArgs<ExtArgs>
   AlumnoInscritoSimposium?: boolean | Prisma.Alumno$AlumnoInscritoSimposiumArgs<ExtArgs>
   _count?: boolean | Prisma.AlumnoCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -661,6 +757,7 @@ export type $AlumnoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Alumno"
   objects: {
     Carrera: Prisma.$CarreraPayload<ExtArgs>
+    AlumnoAsistioEvento: Prisma.$AlumnoAsistioEventoPayload<ExtArgs>[]
     AlumnoInscritoSimposium: Prisma.$AlumnoInscritoSimposiumPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1011,6 +1108,7 @@ readonly fields: AlumnoFieldRefs;
 export interface Prisma__AlumnoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Carrera<T extends Prisma.CarreraDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarreraDefaultArgs<ExtArgs>>): Prisma.Prisma__CarreraClient<runtime.Types.Result.GetResult<Prisma.$CarreraPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  AlumnoAsistioEvento<T extends Prisma.Alumno$AlumnoAsistioEventoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Alumno$AlumnoAsistioEventoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlumnoAsistioEventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   AlumnoInscritoSimposium<T extends Prisma.Alumno$AlumnoInscritoSimposiumArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Alumno$AlumnoInscritoSimposiumArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlumnoInscritoSimposiumPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1391,6 +1489,30 @@ export type AlumnoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Alumnos to delete.
    */
   limit?: number
+}
+
+/**
+ * Alumno.AlumnoAsistioEvento
+ */
+export type Alumno$AlumnoAsistioEventoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AlumnoAsistioEvento
+   */
+  select?: Prisma.AlumnoAsistioEventoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AlumnoAsistioEvento
+   */
+  omit?: Prisma.AlumnoAsistioEventoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AlumnoAsistioEventoInclude<ExtArgs> | null
+  where?: Prisma.AlumnoAsistioEventoWhereInput
+  orderBy?: Prisma.AlumnoAsistioEventoOrderByWithRelationInput | Prisma.AlumnoAsistioEventoOrderByWithRelationInput[]
+  cursor?: Prisma.AlumnoAsistioEventoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AlumnoAsistioEventoScalarFieldEnum | Prisma.AlumnoAsistioEventoScalarFieldEnum[]
 }
 
 /**

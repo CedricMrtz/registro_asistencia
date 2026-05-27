@@ -13,19 +13,11 @@ model Simposium {
   fecha_comienzo          DateTime                  @db.Date
   fecha_acabado           DateTime                  @db.Date
   capacidad_asistentes    Int
-  adminID                 Int
+  adminSimposiumID        Int
   AlumnoInscritoSimposium AlumnoInscritoSimposium[]
   Evento                  Evento[]
-  Admin                   Admin                     @relation(fields: [adminID], references: [adminID], onUpdate: NoAction, map: "FK_Simposium_Admin")
+  AdminSimposium          AdminSimposium            @relation(fields: [adminSimposiumID], references: [adminSimposiumID], onUpdate: NoAction, map: "FK_Simposium_AdminSimposium")
   StaffTrabajaEnSimposium StaffTrabajaEnSimposium[]
-}
-
-model Admin {
-  adminID   Int         @id(map: "PK_Admin") @default(autoincrement())
-  nombre    String      @db.VarChar(120)
-  telefono  String      @db.VarChar(15)
-  email     String      @unique(map: "UQ_Admin_Email") @db.VarChar(150)
-  Simposium Simposium[]
 }
 
 model Alumno {
@@ -36,6 +28,7 @@ model Alumno {
   email                   String                    @unique(map: "UQ_Alumno_Email") @db.VarChar(150)
   nombre_carrera          String                    @db.VarChar(100)
   Carrera                 Carrera                   @relation(fields: [nombre_carrera], references: [nombre_carrera], map: "FK_Alumno_Carrera")
+  AlumnoAsistioEvento     AlumnoAsistioEvento[]
   AlumnoInscritoSimposium AlumnoInscritoSimposium[]
 }
 
@@ -63,14 +56,15 @@ model Escuela {
 }
 
 model Evento {
-  idEvento       Int        @id(map: "PK_Evento") @default(autoincrement())
-  nombreEvento   String     @db.VarChar(150)
-  fecha_comienzo DateTime   @db.DateTime
-  fecha_acabado  DateTime   @db.DateTime
-  idSimposium    Int
-  nombreTipo     String     @db.VarChar(60)
-  Simposium      Simposium  @relation(fields: [idSimposium], references: [idSimposium], onDelete: Cascade, onUpdate: NoAction, map: "FK_Evento_Simposium")
-  TipoEvento     TipoEvento @relation(fields: [nombreTipo], references: [nombreTipo], map: "FK_Evento_TipoEvento")
+  idEvento            Int                   @id(map: "PK_Evento") @default(autoincrement())
+  nombreEvento        String                @db.VarChar(150)
+  fecha_comienzo      DateTime              @db.DateTime
+  fecha_acabado       DateTime              @db.DateTime
+  idSimposium         Int
+  nombreTipo          String                @db.VarChar(60)
+  AlumnoAsistioEvento AlumnoAsistioEvento[]
+  Simposium           Simposium             @relation(fields: [idSimposium], references: [idSimposium], onDelete: Cascade, onUpdate: NoAction, map: "FK_Evento_Simposium")
+  TipoEvento          TipoEvento            @relation(fields: [nombreTipo], references: [nombreTipo], map: "FK_Evento_TipoEvento")
 }
 
 model Staff {
@@ -91,4 +85,23 @@ model StaffTrabajaEnSimposium {
 model TipoEvento {
   nombreTipo String   @id(map: "PK_TipoEvento") @db.VarChar(60)
   Evento     Evento[]
+}
+
+model AdminSimposium {
+  adminSimposiumID Int         @id(map: "PK_AdminSimposium") @default(autoincrement())
+  nombre           String      @db.VarChar(120)
+  telefono         String      @db.VarChar(15)
+  email            String      @unique(map: "UQ_AdminSimposium_Email") @db.VarChar(150)
+  Simposium        Simposium[]
+}
+
+model AlumnoAsistioEvento {
+  matricula     String    @db.VarChar(15)
+  idEvento      Int
+  fecha_llegada DateTime  @db.DateTime
+  fecha_salida  DateTime? @db.DateTime
+  Alumno        Alumno    @relation(fields: [matricula], references: [matricula], map: "FK_AlumnoAsistio_Alumno")
+  Evento        Evento    @relation(fields: [idEvento], references: [idEvento], onDelete: Cascade, onUpdate: NoAction, map: "FK_AlumnoAsistio_Evento")
+
+  @@id([matricula, idEvento], map: "PK_AlumnoAsistioEvento")
 }

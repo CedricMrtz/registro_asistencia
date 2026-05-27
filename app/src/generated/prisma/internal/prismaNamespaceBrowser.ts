@@ -52,7 +52,6 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Simposium: 'Simposium',
-  Admin: 'Admin',
   Alumno: 'Alumno',
   AlumnoInscritoSimposium: 'AlumnoInscritoSimposium',
   Carrera: 'Carrera',
@@ -60,7 +59,9 @@ export const ModelName = {
   Evento: 'Evento',
   Staff: 'Staff',
   StaffTrabajaEnSimposium: 'StaffTrabajaEnSimposium',
-  TipoEvento: 'TipoEvento'
+  TipoEvento: 'TipoEvento',
+  AdminSimposium: 'AdminSimposium',
+  AlumnoAsistioEvento: 'AlumnoAsistioEvento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -86,20 +87,10 @@ export const SimposiumScalarFieldEnum = {
   fecha_comienzo: 'fecha_comienzo',
   fecha_acabado: 'fecha_acabado',
   capacidad_asistentes: 'capacidad_asistentes',
-  adminID: 'adminID'
+  adminSimposiumID: 'adminSimposiumID'
 } as const
 
 export type SimposiumScalarFieldEnum = (typeof SimposiumScalarFieldEnum)[keyof typeof SimposiumScalarFieldEnum]
-
-
-export const AdminScalarFieldEnum = {
-  adminID: 'adminID',
-  nombre: 'nombre',
-  telefono: 'telefono',
-  email: 'email'
-} as const
-
-export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
 export const AlumnoScalarFieldEnum = {
@@ -172,6 +163,26 @@ export const TipoEventoScalarFieldEnum = {
 } as const
 
 export type TipoEventoScalarFieldEnum = (typeof TipoEventoScalarFieldEnum)[keyof typeof TipoEventoScalarFieldEnum]
+
+
+export const AdminSimposiumScalarFieldEnum = {
+  adminSimposiumID: 'adminSimposiumID',
+  nombre: 'nombre',
+  telefono: 'telefono',
+  email: 'email'
+} as const
+
+export type AdminSimposiumScalarFieldEnum = (typeof AdminSimposiumScalarFieldEnum)[keyof typeof AdminSimposiumScalarFieldEnum]
+
+
+export const AlumnoAsistioEventoScalarFieldEnum = {
+  matricula: 'matricula',
+  idEvento: 'idEvento',
+  fecha_llegada: 'fecha_llegada',
+  fecha_salida: 'fecha_salida'
+} as const
+
+export type AlumnoAsistioEventoScalarFieldEnum = (typeof AlumnoAsistioEventoScalarFieldEnum)[keyof typeof AlumnoAsistioEventoScalarFieldEnum]
 
 
 export const SortOrder = {

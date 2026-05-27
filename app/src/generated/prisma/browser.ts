@@ -23,11 +23,6 @@ export * from './enums';
  */
 export type Simposium = Prisma.SimposiumModel
 /**
- * Model Admin
- * 
- */
-export type Admin = Prisma.AdminModel
-/**
  * Model Alumno
  * 
  */
@@ -67,3 +62,13 @@ export type StaffTrabajaEnSimposium = Prisma.StaffTrabajaEnSimposiumModel
  * 
  */
 export type TipoEvento = Prisma.TipoEventoModel
+/**
+ * Model AdminSimposium
+ * 
+ */
+export type AdminSimposium = Prisma.AdminSimposiumModel
+/**
+ * Model AlumnoAsistioEvento
+ * 
+ */
+export type AlumnoAsistioEvento = Prisma.AlumnoAsistioEventoModel

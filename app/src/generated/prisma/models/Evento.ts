@@ -228,6 +228,7 @@ export type EventoWhereInput = {
   fecha_acabado?: Prisma.DateTimeFilter<"Evento"> | Date | string
   idSimposium?: Prisma.IntFilter<"Evento"> | number
   nombreTipo?: Prisma.StringFilter<"Evento"> | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoListRelationFilter
   Simposium?: Prisma.XOR<Prisma.SimposiumScalarRelationFilter, Prisma.SimposiumWhereInput>
   TipoEvento?: Prisma.XOR<Prisma.TipoEventoScalarRelationFilter, Prisma.TipoEventoWhereInput>
 }
@@ -239,6 +240,7 @@ export type EventoOrderByWithRelationInput = {
   fecha_acabado?: Prisma.SortOrder
   idSimposium?: Prisma.SortOrder
   nombreTipo?: Prisma.SortOrder
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoOrderByRelationAggregateInput
   Simposium?: Prisma.SimposiumOrderByWithRelationInput
   TipoEvento?: Prisma.TipoEventoOrderByWithRelationInput
 }
@@ -253,6 +255,7 @@ export type EventoWhereUniqueInput = Prisma.AtLeast<{
   fecha_acabado?: Prisma.DateTimeFilter<"Evento"> | Date | string
   idSimposium?: Prisma.IntFilter<"Evento"> | number
   nombreTipo?: Prisma.StringFilter<"Evento"> | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoListRelationFilter
   Simposium?: Prisma.XOR<Prisma.SimposiumScalarRelationFilter, Prisma.SimposiumWhereInput>
   TipoEvento?: Prisma.XOR<Prisma.TipoEventoScalarRelationFilter, Prisma.TipoEventoWhereInput>
 }, "idEvento">
@@ -287,6 +290,7 @@ export type EventoCreateInput = {
   nombreEvento: string
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutEventoInput
   Simposium: Prisma.SimposiumCreateNestedOneWithoutEventoInput
   TipoEvento: Prisma.TipoEventoCreateNestedOneWithoutEventoInput
 }
@@ -298,12 +302,14 @@ export type EventoUncheckedCreateInput = {
   fecha_acabado: Date | string
   idSimposium: number
   nombreTipo: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutEventoInput
 }
 
 export type EventoUpdateInput = {
   nombreEvento?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutEventoNestedInput
   Simposium?: Prisma.SimposiumUpdateOneRequiredWithoutEventoNestedInput
   TipoEvento?: Prisma.TipoEventoUpdateOneRequiredWithoutEventoNestedInput
 }
@@ -315,6 +321,7 @@ export type EventoUncheckedUpdateInput = {
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   idSimposium?: Prisma.IntFieldUpdateOperationsInput | number
   nombreTipo?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoNestedInput
 }
 
 export type EventoCreateManyInput = {
@@ -385,6 +392,11 @@ export type EventoMinOrderByAggregateInput = {
 export type EventoSumOrderByAggregateInput = {
   idEvento?: Prisma.SortOrder
   idSimposium?: Prisma.SortOrder
+}
+
+export type EventoScalarRelationFilter = {
+  is?: Prisma.EventoWhereInput
+  isNot?: Prisma.EventoWhereInput
 }
 
 export type EventoCreateNestedManyWithoutSimposiumInput = {
@@ -471,10 +483,25 @@ export type EventoUncheckedUpdateManyWithoutTipoEventoNestedInput = {
   deleteMany?: Prisma.EventoScalarWhereInput | Prisma.EventoScalarWhereInput[]
 }
 
+export type EventoCreateNestedOneWithoutAlumnoAsistioEventoInput = {
+  create?: Prisma.XOR<Prisma.EventoCreateWithoutAlumnoAsistioEventoInput, Prisma.EventoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  connectOrCreate?: Prisma.EventoCreateOrConnectWithoutAlumnoAsistioEventoInput
+  connect?: Prisma.EventoWhereUniqueInput
+}
+
+export type EventoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput = {
+  create?: Prisma.XOR<Prisma.EventoCreateWithoutAlumnoAsistioEventoInput, Prisma.EventoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  connectOrCreate?: Prisma.EventoCreateOrConnectWithoutAlumnoAsistioEventoInput
+  upsert?: Prisma.EventoUpsertWithoutAlumnoAsistioEventoInput
+  connect?: Prisma.EventoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventoUpdateToOneWithWhereWithoutAlumnoAsistioEventoInput, Prisma.EventoUpdateWithoutAlumnoAsistioEventoInput>, Prisma.EventoUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+}
+
 export type EventoCreateWithoutSimposiumInput = {
   nombreEvento: string
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutEventoInput
   TipoEvento: Prisma.TipoEventoCreateNestedOneWithoutEventoInput
 }
 
@@ -484,6 +511,7 @@ export type EventoUncheckedCreateWithoutSimposiumInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   nombreTipo: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutEventoInput
 }
 
 export type EventoCreateOrConnectWithoutSimposiumInput = {
@@ -527,6 +555,7 @@ export type EventoCreateWithoutTipoEventoInput = {
   nombreEvento: string
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutEventoInput
   Simposium: Prisma.SimposiumCreateNestedOneWithoutEventoInput
 }
 
@@ -536,6 +565,7 @@ export type EventoUncheckedCreateWithoutTipoEventoInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   idSimposium: number
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutEventoInput
 }
 
 export type EventoCreateOrConnectWithoutTipoEventoInput = {
@@ -563,6 +593,56 @@ export type EventoUpdateManyWithWhereWithoutTipoEventoInput = {
   data: Prisma.XOR<Prisma.EventoUpdateManyMutationInput, Prisma.EventoUncheckedUpdateManyWithoutTipoEventoInput>
 }
 
+export type EventoCreateWithoutAlumnoAsistioEventoInput = {
+  nombreEvento: string
+  fecha_comienzo: Date | string
+  fecha_acabado: Date | string
+  Simposium: Prisma.SimposiumCreateNestedOneWithoutEventoInput
+  TipoEvento: Prisma.TipoEventoCreateNestedOneWithoutEventoInput
+}
+
+export type EventoUncheckedCreateWithoutAlumnoAsistioEventoInput = {
+  idEvento?: number
+  nombreEvento: string
+  fecha_comienzo: Date | string
+  fecha_acabado: Date | string
+  idSimposium: number
+  nombreTipo: string
+}
+
+export type EventoCreateOrConnectWithoutAlumnoAsistioEventoInput = {
+  where: Prisma.EventoWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventoCreateWithoutAlumnoAsistioEventoInput, Prisma.EventoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+}
+
+export type EventoUpsertWithoutAlumnoAsistioEventoInput = {
+  update: Prisma.XOR<Prisma.EventoUpdateWithoutAlumnoAsistioEventoInput, Prisma.EventoUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+  create: Prisma.XOR<Prisma.EventoCreateWithoutAlumnoAsistioEventoInput, Prisma.EventoUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  where?: Prisma.EventoWhereInput
+}
+
+export type EventoUpdateToOneWithWhereWithoutAlumnoAsistioEventoInput = {
+  where?: Prisma.EventoWhereInput
+  data: Prisma.XOR<Prisma.EventoUpdateWithoutAlumnoAsistioEventoInput, Prisma.EventoUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+}
+
+export type EventoUpdateWithoutAlumnoAsistioEventoInput = {
+  nombreEvento?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Simposium?: Prisma.SimposiumUpdateOneRequiredWithoutEventoNestedInput
+  TipoEvento?: Prisma.TipoEventoUpdateOneRequiredWithoutEventoNestedInput
+}
+
+export type EventoUncheckedUpdateWithoutAlumnoAsistioEventoInput = {
+  idEvento?: Prisma.IntFieldUpdateOperationsInput | number
+  nombreEvento?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  idSimposium?: Prisma.IntFieldUpdateOperationsInput | number
+  nombreTipo?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type EventoCreateManySimposiumInput = {
   nombreEvento: string
   fecha_comienzo: Date | string
@@ -574,6 +654,7 @@ export type EventoUpdateWithoutSimposiumInput = {
   nombreEvento?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutEventoNestedInput
   TipoEvento?: Prisma.TipoEventoUpdateOneRequiredWithoutEventoNestedInput
 }
 
@@ -583,6 +664,7 @@ export type EventoUncheckedUpdateWithoutSimposiumInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nombreTipo?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoNestedInput
 }
 
 export type EventoUncheckedUpdateManyWithoutSimposiumInput = {
@@ -604,6 +686,7 @@ export type EventoUpdateWithoutTipoEventoInput = {
   nombreEvento?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutEventoNestedInput
   Simposium?: Prisma.SimposiumUpdateOneRequiredWithoutEventoNestedInput
 }
 
@@ -613,6 +696,7 @@ export type EventoUncheckedUpdateWithoutTipoEventoInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   idSimposium?: Prisma.IntFieldUpdateOperationsInput | number
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoNestedInput
 }
 
 export type EventoUncheckedUpdateManyWithoutTipoEventoInput = {
@@ -624,6 +708,35 @@ export type EventoUncheckedUpdateManyWithoutTipoEventoInput = {
 }
 
 
+/**
+ * Count Type EventoCountOutputType
+ */
+
+export type EventoCountOutputType = {
+  AlumnoAsistioEvento: number
+}
+
+export type EventoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AlumnoAsistioEvento?: boolean | EventoCountOutputTypeCountAlumnoAsistioEventoArgs
+}
+
+/**
+ * EventoCountOutputType without action
+ */
+export type EventoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventoCountOutputType
+   */
+  select?: Prisma.EventoCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EventoCountOutputType without action
+ */
+export type EventoCountOutputTypeCountAlumnoAsistioEventoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AlumnoAsistioEventoWhereInput
+}
+
 
 export type EventoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idEvento?: boolean
@@ -632,8 +745,10 @@ export type EventoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   fecha_acabado?: boolean
   idSimposium?: boolean
   nombreTipo?: boolean
+  AlumnoAsistioEvento?: boolean | Prisma.Evento$AlumnoAsistioEventoArgs<ExtArgs>
   Simposium?: boolean | Prisma.SimposiumDefaultArgs<ExtArgs>
   TipoEvento?: boolean | Prisma.TipoEventoDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.EventoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["evento"]>
 
 
@@ -649,13 +764,16 @@ export type EventoSelectScalar = {
 
 export type EventoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idEvento" | "nombreEvento" | "fecha_comienzo" | "fecha_acabado" | "idSimposium" | "nombreTipo", ExtArgs["result"]["evento"]>
 export type EventoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AlumnoAsistioEvento?: boolean | Prisma.Evento$AlumnoAsistioEventoArgs<ExtArgs>
   Simposium?: boolean | Prisma.SimposiumDefaultArgs<ExtArgs>
   TipoEvento?: boolean | Prisma.TipoEventoDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.EventoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $EventoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Evento"
   objects: {
+    AlumnoAsistioEvento: Prisma.$AlumnoAsistioEventoPayload<ExtArgs>[]
     Simposium: Prisma.$SimposiumPayload<ExtArgs>
     TipoEvento: Prisma.$TipoEventoPayload<ExtArgs>
   }
@@ -1006,6 +1124,7 @@ readonly fields: EventoFieldRefs;
  */
 export interface Prisma__EventoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  AlumnoAsistioEvento<T extends Prisma.Evento$AlumnoAsistioEventoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Evento$AlumnoAsistioEventoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlumnoAsistioEventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Simposium<T extends Prisma.SimposiumDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SimposiumDefaultArgs<ExtArgs>>): Prisma.Prisma__SimposiumClient<runtime.Types.Result.GetResult<Prisma.$SimposiumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   TipoEvento<T extends Prisma.TipoEventoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TipoEventoDefaultArgs<ExtArgs>>): Prisma.Prisma__TipoEventoClient<runtime.Types.Result.GetResult<Prisma.$TipoEventoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1387,6 +1506,30 @@ export type EventoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Eventos to delete.
    */
   limit?: number
+}
+
+/**
+ * Evento.AlumnoAsistioEvento
+ */
+export type Evento$AlumnoAsistioEventoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AlumnoAsistioEvento
+   */
+  select?: Prisma.AlumnoAsistioEventoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AlumnoAsistioEvento
+   */
+  omit?: Prisma.AlumnoAsistioEventoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AlumnoAsistioEventoInclude<ExtArgs> | null
+  where?: Prisma.AlumnoAsistioEventoWhereInput
+  orderBy?: Prisma.AlumnoAsistioEventoOrderByWithRelationInput | Prisma.AlumnoAsistioEventoOrderByWithRelationInput[]
+  cursor?: Prisma.AlumnoAsistioEventoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AlumnoAsistioEventoScalarFieldEnum | Prisma.AlumnoAsistioEventoScalarFieldEnum[]
 }
 
 /**

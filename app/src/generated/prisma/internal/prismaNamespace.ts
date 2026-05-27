@@ -385,7 +385,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Simposium: 'Simposium',
-  Admin: 'Admin',
   Alumno: 'Alumno',
   AlumnoInscritoSimposium: 'AlumnoInscritoSimposium',
   Carrera: 'Carrera',
@@ -393,7 +392,9 @@ export const ModelName = {
   Evento: 'Evento',
   Staff: 'Staff',
   StaffTrabajaEnSimposium: 'StaffTrabajaEnSimposium',
-  TipoEvento: 'TipoEvento'
+  TipoEvento: 'TipoEvento',
+  AdminSimposium: 'AdminSimposium',
+  AlumnoAsistioEvento: 'AlumnoAsistioEvento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "simposium" | "admin" | "alumno" | "alumnoInscritoSimposium" | "carrera" | "escuela" | "evento" | "staff" | "staffTrabajaEnSimposium" | "tipoEvento"
+    modelProps: "simposium" | "alumno" | "alumnoInscritoSimposium" | "carrera" | "escuela" | "evento" | "staff" | "staffTrabajaEnSimposium" | "tipoEvento" | "adminSimposium" | "alumnoAsistioEvento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -476,72 +477,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SimposiumCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SimposiumCountAggregateOutputType> | number
-        }
-      }
-    }
-    Admin: {
-      payload: Prisma.$AdminPayload<ExtArgs>
-      fields: Prisma.AdminFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.AdminFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.AdminFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>
-        }
-        findFirst: {
-          args: Prisma.AdminFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.AdminFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>
-        }
-        findMany: {
-          args: Prisma.AdminFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>[]
-        }
-        create: {
-          args: Prisma.AdminCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>
-        }
-        createMany: {
-          args: Prisma.AdminCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.AdminDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>
-        }
-        update: {
-          args: Prisma.AdminUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>
-        }
-        deleteMany: {
-          args: Prisma.AdminDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.AdminUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.AdminUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPayload>
-        }
-        aggregate: {
-          args: Prisma.AdminAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAdmin>
-        }
-        groupBy: {
-          args: Prisma.AdminGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AdminGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.AdminCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AdminCountAggregateOutputType> | number
         }
       }
     }
@@ -1073,6 +1008,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AdminSimposium: {
+      payload: Prisma.$AdminSimposiumPayload<ExtArgs>
+      fields: Prisma.AdminSimposiumFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdminSimposiumFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdminSimposiumFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>
+        }
+        findFirst: {
+          args: Prisma.AdminSimposiumFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdminSimposiumFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>
+        }
+        findMany: {
+          args: Prisma.AdminSimposiumFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>[]
+        }
+        create: {
+          args: Prisma.AdminSimposiumCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>
+        }
+        createMany: {
+          args: Prisma.AdminSimposiumCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AdminSimposiumDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>
+        }
+        update: {
+          args: Prisma.AdminSimposiumUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdminSimposiumDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdminSimposiumUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AdminSimposiumUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSimposiumPayload>
+        }
+        aggregate: {
+          args: Prisma.AdminSimposiumAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdminSimposium>
+        }
+        groupBy: {
+          args: Prisma.AdminSimposiumGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminSimposiumGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdminSimposiumCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminSimposiumCountAggregateOutputType> | number
+        }
+      }
+    }
+    AlumnoAsistioEvento: {
+      payload: Prisma.$AlumnoAsistioEventoPayload<ExtArgs>
+      fields: Prisma.AlumnoAsistioEventoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AlumnoAsistioEventoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AlumnoAsistioEventoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>
+        }
+        findFirst: {
+          args: Prisma.AlumnoAsistioEventoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AlumnoAsistioEventoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>
+        }
+        findMany: {
+          args: Prisma.AlumnoAsistioEventoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>[]
+        }
+        create: {
+          args: Prisma.AlumnoAsistioEventoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>
+        }
+        createMany: {
+          args: Prisma.AlumnoAsistioEventoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AlumnoAsistioEventoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>
+        }
+        update: {
+          args: Prisma.AlumnoAsistioEventoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>
+        }
+        deleteMany: {
+          args: Prisma.AlumnoAsistioEventoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AlumnoAsistioEventoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AlumnoAsistioEventoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumnoAsistioEventoPayload>
+        }
+        aggregate: {
+          args: Prisma.AlumnoAsistioEventoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAlumnoAsistioEvento>
+        }
+        groupBy: {
+          args: Prisma.AlumnoAsistioEventoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlumnoAsistioEventoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AlumnoAsistioEventoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlumnoAsistioEventoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1119,20 +1186,10 @@ export const SimposiumScalarFieldEnum = {
   fecha_comienzo: 'fecha_comienzo',
   fecha_acabado: 'fecha_acabado',
   capacidad_asistentes: 'capacidad_asistentes',
-  adminID: 'adminID'
+  adminSimposiumID: 'adminSimposiumID'
 } as const
 
 export type SimposiumScalarFieldEnum = (typeof SimposiumScalarFieldEnum)[keyof typeof SimposiumScalarFieldEnum]
-
-
-export const AdminScalarFieldEnum = {
-  adminID: 'adminID',
-  nombre: 'nombre',
-  telefono: 'telefono',
-  email: 'email'
-} as const
-
-export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
 export const AlumnoScalarFieldEnum = {
@@ -1205,6 +1262,26 @@ export const TipoEventoScalarFieldEnum = {
 } as const
 
 export type TipoEventoScalarFieldEnum = (typeof TipoEventoScalarFieldEnum)[keyof typeof TipoEventoScalarFieldEnum]
+
+
+export const AdminSimposiumScalarFieldEnum = {
+  adminSimposiumID: 'adminSimposiumID',
+  nombre: 'nombre',
+  telefono: 'telefono',
+  email: 'email'
+} as const
+
+export type AdminSimposiumScalarFieldEnum = (typeof AdminSimposiumScalarFieldEnum)[keyof typeof AdminSimposiumScalarFieldEnum]
+
+
+export const AlumnoAsistioEventoScalarFieldEnum = {
+  matricula: 'matricula',
+  idEvento: 'idEvento',
+  fecha_llegada: 'fecha_llegada',
+  fecha_salida: 'fecha_salida'
+} as const
+
+export type AlumnoAsistioEventoScalarFieldEnum = (typeof AlumnoAsistioEventoScalarFieldEnum)[keyof typeof AlumnoAsistioEventoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1367,7 +1444,6 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   simposium?: Prisma.SimposiumOmit
-  admin?: Prisma.AdminOmit
   alumno?: Prisma.AlumnoOmit
   alumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumOmit
   carrera?: Prisma.CarreraOmit
@@ -1376,6 +1452,8 @@ export type GlobalOmitConfig = {
   staff?: Prisma.StaffOmit
   staffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumOmit
   tipoEvento?: Prisma.TipoEventoOmit
+  adminSimposium?: Prisma.AdminSimposiumOmit
+  alumnoAsistioEvento?: Prisma.AlumnoAsistioEventoOmit
 }
 
 /* Types for Logging */

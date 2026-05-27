@@ -29,13 +29,13 @@ export type AggregateSimposium = {
 export type SimposiumAvgAggregateOutputType = {
   idSimposium: number | null
   capacidad_asistentes: number | null
-  adminID: number | null
+  adminSimposiumID: number | null
 }
 
 export type SimposiumSumAggregateOutputType = {
   idSimposium: number | null
   capacidad_asistentes: number | null
-  adminID: number | null
+  adminSimposiumID: number | null
 }
 
 export type SimposiumMinAggregateOutputType = {
@@ -44,7 +44,7 @@ export type SimposiumMinAggregateOutputType = {
   fecha_comienzo: Date | null
   fecha_acabado: Date | null
   capacidad_asistentes: number | null
-  adminID: number | null
+  adminSimposiumID: number | null
 }
 
 export type SimposiumMaxAggregateOutputType = {
@@ -53,7 +53,7 @@ export type SimposiumMaxAggregateOutputType = {
   fecha_comienzo: Date | null
   fecha_acabado: Date | null
   capacidad_asistentes: number | null
-  adminID: number | null
+  adminSimposiumID: number | null
 }
 
 export type SimposiumCountAggregateOutputType = {
@@ -62,7 +62,7 @@ export type SimposiumCountAggregateOutputType = {
   fecha_comienzo: number
   fecha_acabado: number
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
   _all: number
 }
 
@@ -70,13 +70,13 @@ export type SimposiumCountAggregateOutputType = {
 export type SimposiumAvgAggregateInputType = {
   idSimposium?: true
   capacidad_asistentes?: true
-  adminID?: true
+  adminSimposiumID?: true
 }
 
 export type SimposiumSumAggregateInputType = {
   idSimposium?: true
   capacidad_asistentes?: true
-  adminID?: true
+  adminSimposiumID?: true
 }
 
 export type SimposiumMinAggregateInputType = {
@@ -85,7 +85,7 @@ export type SimposiumMinAggregateInputType = {
   fecha_comienzo?: true
   fecha_acabado?: true
   capacidad_asistentes?: true
-  adminID?: true
+  adminSimposiumID?: true
 }
 
 export type SimposiumMaxAggregateInputType = {
@@ -94,7 +94,7 @@ export type SimposiumMaxAggregateInputType = {
   fecha_comienzo?: true
   fecha_acabado?: true
   capacidad_asistentes?: true
-  adminID?: true
+  adminSimposiumID?: true
 }
 
 export type SimposiumCountAggregateInputType = {
@@ -103,7 +103,7 @@ export type SimposiumCountAggregateInputType = {
   fecha_comienzo?: true
   fecha_acabado?: true
   capacidad_asistentes?: true
-  adminID?: true
+  adminSimposiumID?: true
   _all?: true
 }
 
@@ -199,7 +199,7 @@ export type SimposiumGroupByOutputType = {
   fecha_comienzo: Date
   fecha_acabado: Date
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
   _count: SimposiumCountAggregateOutputType | null
   _avg: SimposiumAvgAggregateOutputType | null
   _sum: SimposiumSumAggregateOutputType | null
@@ -231,10 +231,10 @@ export type SimposiumWhereInput = {
   fecha_comienzo?: Prisma.DateTimeFilter<"Simposium"> | Date | string
   fecha_acabado?: Prisma.DateTimeFilter<"Simposium"> | Date | string
   capacidad_asistentes?: Prisma.IntFilter<"Simposium"> | number
-  adminID?: Prisma.IntFilter<"Simposium"> | number
+  adminSimposiumID?: Prisma.IntFilter<"Simposium"> | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumListRelationFilter
   Evento?: Prisma.EventoListRelationFilter
-  Admin?: Prisma.XOR<Prisma.AdminScalarRelationFilter, Prisma.AdminWhereInput>
+  AdminSimposium?: Prisma.XOR<Prisma.AdminSimposiumScalarRelationFilter, Prisma.AdminSimposiumWhereInput>
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumListRelationFilter
 }
 
@@ -244,10 +244,10 @@ export type SimposiumOrderByWithRelationInput = {
   fecha_comienzo?: Prisma.SortOrder
   fecha_acabado?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumOrderByRelationAggregateInput
   Evento?: Prisma.EventoOrderByRelationAggregateInput
-  Admin?: Prisma.AdminOrderByWithRelationInput
+  AdminSimposium?: Prisma.AdminSimposiumOrderByWithRelationInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumOrderByRelationAggregateInput
 }
 
@@ -260,10 +260,10 @@ export type SimposiumWhereUniqueInput = Prisma.AtLeast<{
   fecha_comienzo?: Prisma.DateTimeFilter<"Simposium"> | Date | string
   fecha_acabado?: Prisma.DateTimeFilter<"Simposium"> | Date | string
   capacidad_asistentes?: Prisma.IntFilter<"Simposium"> | number
-  adminID?: Prisma.IntFilter<"Simposium"> | number
+  adminSimposiumID?: Prisma.IntFilter<"Simposium"> | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumListRelationFilter
   Evento?: Prisma.EventoListRelationFilter
-  Admin?: Prisma.XOR<Prisma.AdminScalarRelationFilter, Prisma.AdminWhereInput>
+  AdminSimposium?: Prisma.XOR<Prisma.AdminSimposiumScalarRelationFilter, Prisma.AdminSimposiumWhereInput>
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumListRelationFilter
 }, "idSimposium">
 
@@ -273,7 +273,7 @@ export type SimposiumOrderByWithAggregationInput = {
   fecha_comienzo?: Prisma.SortOrder
   fecha_acabado?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
   _count?: Prisma.SimposiumCountOrderByAggregateInput
   _avg?: Prisma.SimposiumAvgOrderByAggregateInput
   _max?: Prisma.SimposiumMaxOrderByAggregateInput
@@ -290,7 +290,7 @@ export type SimposiumScalarWhereWithAggregatesInput = {
   fecha_comienzo?: Prisma.DateTimeWithAggregatesFilter<"Simposium"> | Date | string
   fecha_acabado?: Prisma.DateTimeWithAggregatesFilter<"Simposium"> | Date | string
   capacidad_asistentes?: Prisma.IntWithAggregatesFilter<"Simposium"> | number
-  adminID?: Prisma.IntWithAggregatesFilter<"Simposium"> | number
+  adminSimposiumID?: Prisma.IntWithAggregatesFilter<"Simposium"> | number
 }
 
 export type SimposiumCreateInput = {
@@ -300,7 +300,7 @@ export type SimposiumCreateInput = {
   capacidad_asistentes: number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutSimposiumInput
   Evento?: Prisma.EventoCreateNestedManyWithoutSimposiumInput
-  Admin: Prisma.AdminCreateNestedOneWithoutSimposiumInput
+  AdminSimposium: Prisma.AdminSimposiumCreateNestedOneWithoutSimposiumInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutSimposiumInput
 }
 
@@ -310,7 +310,7 @@ export type SimposiumUncheckedCreateInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
   Evento?: Prisma.EventoUncheckedCreateNestedManyWithoutSimposiumInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
@@ -323,7 +323,7 @@ export type SimposiumUpdateInput = {
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUpdateManyWithoutSimposiumNestedInput
   Evento?: Prisma.EventoUpdateManyWithoutSimposiumNestedInput
-  Admin?: Prisma.AdminUpdateOneRequiredWithoutSimposiumNestedInput
+  AdminSimposium?: Prisma.AdminSimposiumUpdateOneRequiredWithoutSimposiumNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUpdateManyWithoutSimposiumNestedInput
 }
 
@@ -333,7 +333,7 @@ export type SimposiumUncheckedUpdateInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
-  adminID?: Prisma.IntFieldUpdateOperationsInput | number
+  adminSimposiumID?: Prisma.IntFieldUpdateOperationsInput | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
   Evento?: Prisma.EventoUncheckedUpdateManyWithoutSimposiumNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
@@ -344,7 +344,7 @@ export type SimposiumCreateManyInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
 }
 
 export type SimposiumUpdateManyMutationInput = {
@@ -360,7 +360,7 @@ export type SimposiumUncheckedUpdateManyInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
-  adminID?: Prisma.IntFieldUpdateOperationsInput | number
+  adminSimposiumID?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SimposiumCountOrderByAggregateInput = {
@@ -369,13 +369,13 @@ export type SimposiumCountOrderByAggregateInput = {
   fecha_comienzo?: Prisma.SortOrder
   fecha_acabado?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
 }
 
 export type SimposiumAvgOrderByAggregateInput = {
   idSimposium?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
 }
 
 export type SimposiumMaxOrderByAggregateInput = {
@@ -384,7 +384,7 @@ export type SimposiumMaxOrderByAggregateInput = {
   fecha_comienzo?: Prisma.SortOrder
   fecha_acabado?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
 }
 
 export type SimposiumMinOrderByAggregateInput = {
@@ -393,13 +393,18 @@ export type SimposiumMinOrderByAggregateInput = {
   fecha_comienzo?: Prisma.SortOrder
   fecha_acabado?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
 }
 
 export type SimposiumSumOrderByAggregateInput = {
   idSimposium?: Prisma.SortOrder
   capacidad_asistentes?: Prisma.SortOrder
-  adminID?: Prisma.SortOrder
+  adminSimposiumID?: Prisma.SortOrder
+}
+
+export type SimposiumScalarRelationFilter = {
+  is?: Prisma.SimposiumWhereInput
+  isNot?: Prisma.SimposiumWhereInput
 }
 
 export type SimposiumListRelationFilter = {
@@ -410,11 +415,6 @@ export type SimposiumListRelationFilter = {
 
 export type SimposiumOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type SimposiumScalarRelationFilter = {
-  is?: Prisma.SimposiumWhereInput
-  isNot?: Prisma.SimposiumWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -431,48 +431,6 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type SimposiumCreateNestedManyWithoutAdminInput = {
-  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminInput, Prisma.SimposiumUncheckedCreateWithoutAdminInput> | Prisma.SimposiumCreateWithoutAdminInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminInput[]
-  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminInput | Prisma.SimposiumCreateOrConnectWithoutAdminInput[]
-  createMany?: Prisma.SimposiumCreateManyAdminInputEnvelope
-  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-}
-
-export type SimposiumUncheckedCreateNestedManyWithoutAdminInput = {
-  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminInput, Prisma.SimposiumUncheckedCreateWithoutAdminInput> | Prisma.SimposiumCreateWithoutAdminInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminInput[]
-  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminInput | Prisma.SimposiumCreateOrConnectWithoutAdminInput[]
-  createMany?: Prisma.SimposiumCreateManyAdminInputEnvelope
-  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-}
-
-export type SimposiumUpdateManyWithoutAdminNestedInput = {
-  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminInput, Prisma.SimposiumUncheckedCreateWithoutAdminInput> | Prisma.SimposiumCreateWithoutAdminInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminInput[]
-  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminInput | Prisma.SimposiumCreateOrConnectWithoutAdminInput[]
-  upsert?: Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminInput | Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminInput[]
-  createMany?: Prisma.SimposiumCreateManyAdminInputEnvelope
-  set?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  disconnect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  delete?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  update?: Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminInput | Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminInput[]
-  updateMany?: Prisma.SimposiumUpdateManyWithWhereWithoutAdminInput | Prisma.SimposiumUpdateManyWithWhereWithoutAdminInput[]
-  deleteMany?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
-}
-
-export type SimposiumUncheckedUpdateManyWithoutAdminNestedInput = {
-  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminInput, Prisma.SimposiumUncheckedCreateWithoutAdminInput> | Prisma.SimposiumCreateWithoutAdminInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminInput[]
-  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminInput | Prisma.SimposiumCreateOrConnectWithoutAdminInput[]
-  upsert?: Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminInput | Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminInput[]
-  createMany?: Prisma.SimposiumCreateManyAdminInputEnvelope
-  set?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  disconnect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  delete?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
-  update?: Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminInput | Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminInput[]
-  updateMany?: Prisma.SimposiumUpdateManyWithWhereWithoutAdminInput | Prisma.SimposiumUpdateManyWithWhereWithoutAdminInput[]
-  deleteMany?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
 }
 
 export type SimposiumCreateNestedOneWithoutAlumnoInscritoSimposiumInput = {
@@ -517,62 +475,46 @@ export type SimposiumUpdateOneRequiredWithoutStaffTrabajaEnSimposiumNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.SimposiumUpdateToOneWithWhereWithoutStaffTrabajaEnSimposiumInput, Prisma.SimposiumUpdateWithoutStaffTrabajaEnSimposiumInput>, Prisma.SimposiumUncheckedUpdateWithoutStaffTrabajaEnSimposiumInput>
 }
 
-export type SimposiumCreateWithoutAdminInput = {
-  nombre: string
-  fecha_comienzo: Date | string
-  fecha_acabado: Date | string
-  capacidad_asistentes: number
-  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutSimposiumInput
-  Evento?: Prisma.EventoCreateNestedManyWithoutSimposiumInput
-  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutSimposiumInput
+export type SimposiumCreateNestedManyWithoutAdminSimposiumInput = {
+  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput> | Prisma.SimposiumCreateWithoutAdminSimposiumInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput[]
+  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput | Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput[]
+  createMany?: Prisma.SimposiumCreateManyAdminSimposiumInputEnvelope
+  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
 }
 
-export type SimposiumUncheckedCreateWithoutAdminInput = {
-  idSimposium?: number
-  nombre: string
-  fecha_comienzo: Date | string
-  fecha_acabado: Date | string
-  capacidad_asistentes: number
-  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
-  Evento?: Prisma.EventoUncheckedCreateNestedManyWithoutSimposiumInput
-  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
+export type SimposiumUncheckedCreateNestedManyWithoutAdminSimposiumInput = {
+  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput> | Prisma.SimposiumCreateWithoutAdminSimposiumInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput[]
+  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput | Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput[]
+  createMany?: Prisma.SimposiumCreateManyAdminSimposiumInputEnvelope
+  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
 }
 
-export type SimposiumCreateOrConnectWithoutAdminInput = {
-  where: Prisma.SimposiumWhereUniqueInput
-  create: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminInput, Prisma.SimposiumUncheckedCreateWithoutAdminInput>
+export type SimposiumUpdateManyWithoutAdminSimposiumNestedInput = {
+  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput> | Prisma.SimposiumCreateWithoutAdminSimposiumInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput[]
+  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput | Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput[]
+  upsert?: Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminSimposiumInput | Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminSimposiumInput[]
+  createMany?: Prisma.SimposiumCreateManyAdminSimposiumInputEnvelope
+  set?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  disconnect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  delete?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  update?: Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminSimposiumInput | Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminSimposiumInput[]
+  updateMany?: Prisma.SimposiumUpdateManyWithWhereWithoutAdminSimposiumInput | Prisma.SimposiumUpdateManyWithWhereWithoutAdminSimposiumInput[]
+  deleteMany?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
 }
 
-export type SimposiumCreateManyAdminInputEnvelope = {
-  data: Prisma.SimposiumCreateManyAdminInput | Prisma.SimposiumCreateManyAdminInput[]
-}
-
-export type SimposiumUpsertWithWhereUniqueWithoutAdminInput = {
-  where: Prisma.SimposiumWhereUniqueInput
-  update: Prisma.XOR<Prisma.SimposiumUpdateWithoutAdminInput, Prisma.SimposiumUncheckedUpdateWithoutAdminInput>
-  create: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminInput, Prisma.SimposiumUncheckedCreateWithoutAdminInput>
-}
-
-export type SimposiumUpdateWithWhereUniqueWithoutAdminInput = {
-  where: Prisma.SimposiumWhereUniqueInput
-  data: Prisma.XOR<Prisma.SimposiumUpdateWithoutAdminInput, Prisma.SimposiumUncheckedUpdateWithoutAdminInput>
-}
-
-export type SimposiumUpdateManyWithWhereWithoutAdminInput = {
-  where: Prisma.SimposiumScalarWhereInput
-  data: Prisma.XOR<Prisma.SimposiumUpdateManyMutationInput, Prisma.SimposiumUncheckedUpdateManyWithoutAdminInput>
-}
-
-export type SimposiumScalarWhereInput = {
-  AND?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
-  OR?: Prisma.SimposiumScalarWhereInput[]
-  NOT?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
-  idSimposium?: Prisma.IntFilter<"Simposium"> | number
-  nombre?: Prisma.StringFilter<"Simposium"> | string
-  fecha_comienzo?: Prisma.DateTimeFilter<"Simposium"> | Date | string
-  fecha_acabado?: Prisma.DateTimeFilter<"Simposium"> | Date | string
-  capacidad_asistentes?: Prisma.IntFilter<"Simposium"> | number
-  adminID?: Prisma.IntFilter<"Simposium"> | number
+export type SimposiumUncheckedUpdateManyWithoutAdminSimposiumNestedInput = {
+  create?: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput> | Prisma.SimposiumCreateWithoutAdminSimposiumInput[] | Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput[]
+  connectOrCreate?: Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput | Prisma.SimposiumCreateOrConnectWithoutAdminSimposiumInput[]
+  upsert?: Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminSimposiumInput | Prisma.SimposiumUpsertWithWhereUniqueWithoutAdminSimposiumInput[]
+  createMany?: Prisma.SimposiumCreateManyAdminSimposiumInputEnvelope
+  set?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  disconnect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  delete?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  connect?: Prisma.SimposiumWhereUniqueInput | Prisma.SimposiumWhereUniqueInput[]
+  update?: Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminSimposiumInput | Prisma.SimposiumUpdateWithWhereUniqueWithoutAdminSimposiumInput[]
+  updateMany?: Prisma.SimposiumUpdateManyWithWhereWithoutAdminSimposiumInput | Prisma.SimposiumUpdateManyWithWhereWithoutAdminSimposiumInput[]
+  deleteMany?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
 }
 
 export type SimposiumCreateWithoutAlumnoInscritoSimposiumInput = {
@@ -581,7 +523,7 @@ export type SimposiumCreateWithoutAlumnoInscritoSimposiumInput = {
   fecha_acabado: Date | string
   capacidad_asistentes: number
   Evento?: Prisma.EventoCreateNestedManyWithoutSimposiumInput
-  Admin: Prisma.AdminCreateNestedOneWithoutSimposiumInput
+  AdminSimposium: Prisma.AdminSimposiumCreateNestedOneWithoutSimposiumInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutSimposiumInput
 }
 
@@ -591,7 +533,7 @@ export type SimposiumUncheckedCreateWithoutAlumnoInscritoSimposiumInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
   Evento?: Prisma.EventoUncheckedCreateNestedManyWithoutSimposiumInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
 }
@@ -618,7 +560,7 @@ export type SimposiumUpdateWithoutAlumnoInscritoSimposiumInput = {
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
   Evento?: Prisma.EventoUpdateManyWithoutSimposiumNestedInput
-  Admin?: Prisma.AdminUpdateOneRequiredWithoutSimposiumNestedInput
+  AdminSimposium?: Prisma.AdminSimposiumUpdateOneRequiredWithoutSimposiumNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUpdateManyWithoutSimposiumNestedInput
 }
 
@@ -628,7 +570,7 @@ export type SimposiumUncheckedUpdateWithoutAlumnoInscritoSimposiumInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
-  adminID?: Prisma.IntFieldUpdateOperationsInput | number
+  adminSimposiumID?: Prisma.IntFieldUpdateOperationsInput | number
   Evento?: Prisma.EventoUncheckedUpdateManyWithoutSimposiumNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
 }
@@ -639,7 +581,7 @@ export type SimposiumCreateWithoutEventoInput = {
   fecha_acabado: Date | string
   capacidad_asistentes: number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutSimposiumInput
-  Admin: Prisma.AdminCreateNestedOneWithoutSimposiumInput
+  AdminSimposium: Prisma.AdminSimposiumCreateNestedOneWithoutSimposiumInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutSimposiumInput
 }
 
@@ -649,7 +591,7 @@ export type SimposiumUncheckedCreateWithoutEventoInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
 }
@@ -676,7 +618,7 @@ export type SimposiumUpdateWithoutEventoInput = {
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUpdateManyWithoutSimposiumNestedInput
-  Admin?: Prisma.AdminUpdateOneRequiredWithoutSimposiumNestedInput
+  AdminSimposium?: Prisma.AdminSimposiumUpdateOneRequiredWithoutSimposiumNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUpdateManyWithoutSimposiumNestedInput
 }
 
@@ -686,7 +628,7 @@ export type SimposiumUncheckedUpdateWithoutEventoInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
-  adminID?: Prisma.IntFieldUpdateOperationsInput | number
+  adminSimposiumID?: Prisma.IntFieldUpdateOperationsInput | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
 }
@@ -698,7 +640,7 @@ export type SimposiumCreateWithoutStaffTrabajaEnSimposiumInput = {
   capacidad_asistentes: number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutSimposiumInput
   Evento?: Prisma.EventoCreateNestedManyWithoutSimposiumInput
-  Admin: Prisma.AdminCreateNestedOneWithoutSimposiumInput
+  AdminSimposium: Prisma.AdminSimposiumCreateNestedOneWithoutSimposiumInput
 }
 
 export type SimposiumUncheckedCreateWithoutStaffTrabajaEnSimposiumInput = {
@@ -707,7 +649,7 @@ export type SimposiumUncheckedCreateWithoutStaffTrabajaEnSimposiumInput = {
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   capacidad_asistentes: number
-  adminID: number
+  adminSimposiumID: number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
   Evento?: Prisma.EventoUncheckedCreateNestedManyWithoutSimposiumInput
 }
@@ -735,7 +677,7 @@ export type SimposiumUpdateWithoutStaffTrabajaEnSimposiumInput = {
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUpdateManyWithoutSimposiumNestedInput
   Evento?: Prisma.EventoUpdateManyWithoutSimposiumNestedInput
-  Admin?: Prisma.AdminUpdateOneRequiredWithoutSimposiumNestedInput
+  AdminSimposium?: Prisma.AdminSimposiumUpdateOneRequiredWithoutSimposiumNestedInput
 }
 
 export type SimposiumUncheckedUpdateWithoutStaffTrabajaEnSimposiumInput = {
@@ -744,19 +686,77 @@ export type SimposiumUncheckedUpdateWithoutStaffTrabajaEnSimposiumInput = {
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   capacidad_asistentes?: Prisma.IntFieldUpdateOperationsInput | number
-  adminID?: Prisma.IntFieldUpdateOperationsInput | number
+  adminSimposiumID?: Prisma.IntFieldUpdateOperationsInput | number
   AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
   Evento?: Prisma.EventoUncheckedUpdateManyWithoutSimposiumNestedInput
 }
 
-export type SimposiumCreateManyAdminInput = {
+export type SimposiumCreateWithoutAdminSimposiumInput = {
+  nombre: string
+  fecha_comienzo: Date | string
+  fecha_acabado: Date | string
+  capacidad_asistentes: number
+  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumCreateNestedManyWithoutSimposiumInput
+  Evento?: Prisma.EventoCreateNestedManyWithoutSimposiumInput
+  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutSimposiumInput
+}
+
+export type SimposiumUncheckedCreateWithoutAdminSimposiumInput = {
+  idSimposium?: number
+  nombre: string
+  fecha_comienzo: Date | string
+  fecha_acabado: Date | string
+  capacidad_asistentes: number
+  AlumnoInscritoSimposium?: Prisma.AlumnoInscritoSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
+  Evento?: Prisma.EventoUncheckedCreateNestedManyWithoutSimposiumInput
+  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutSimposiumInput
+}
+
+export type SimposiumCreateOrConnectWithoutAdminSimposiumInput = {
+  where: Prisma.SimposiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput>
+}
+
+export type SimposiumCreateManyAdminSimposiumInputEnvelope = {
+  data: Prisma.SimposiumCreateManyAdminSimposiumInput | Prisma.SimposiumCreateManyAdminSimposiumInput[]
+}
+
+export type SimposiumUpsertWithWhereUniqueWithoutAdminSimposiumInput = {
+  where: Prisma.SimposiumWhereUniqueInput
+  update: Prisma.XOR<Prisma.SimposiumUpdateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedUpdateWithoutAdminSimposiumInput>
+  create: Prisma.XOR<Prisma.SimposiumCreateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedCreateWithoutAdminSimposiumInput>
+}
+
+export type SimposiumUpdateWithWhereUniqueWithoutAdminSimposiumInput = {
+  where: Prisma.SimposiumWhereUniqueInput
+  data: Prisma.XOR<Prisma.SimposiumUpdateWithoutAdminSimposiumInput, Prisma.SimposiumUncheckedUpdateWithoutAdminSimposiumInput>
+}
+
+export type SimposiumUpdateManyWithWhereWithoutAdminSimposiumInput = {
+  where: Prisma.SimposiumScalarWhereInput
+  data: Prisma.XOR<Prisma.SimposiumUpdateManyMutationInput, Prisma.SimposiumUncheckedUpdateManyWithoutAdminSimposiumInput>
+}
+
+export type SimposiumScalarWhereInput = {
+  AND?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
+  OR?: Prisma.SimposiumScalarWhereInput[]
+  NOT?: Prisma.SimposiumScalarWhereInput | Prisma.SimposiumScalarWhereInput[]
+  idSimposium?: Prisma.IntFilter<"Simposium"> | number
+  nombre?: Prisma.StringFilter<"Simposium"> | string
+  fecha_comienzo?: Prisma.DateTimeFilter<"Simposium"> | Date | string
+  fecha_acabado?: Prisma.DateTimeFilter<"Simposium"> | Date | string
+  capacidad_asistentes?: Prisma.IntFilter<"Simposium"> | number
+  adminSimposiumID?: Prisma.IntFilter<"Simposium"> | number
+}
+
+export type SimposiumCreateManyAdminSimposiumInput = {
   nombre: string
   fecha_comienzo: Date | string
   fecha_acabado: Date | string
   capacidad_asistentes: number
 }
 
-export type SimposiumUpdateWithoutAdminInput = {
+export type SimposiumUpdateWithoutAdminSimposiumInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_acabado?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -766,7 +766,7 @@ export type SimposiumUpdateWithoutAdminInput = {
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUpdateManyWithoutSimposiumNestedInput
 }
 
-export type SimposiumUncheckedUpdateWithoutAdminInput = {
+export type SimposiumUncheckedUpdateWithoutAdminSimposiumInput = {
   idSimposium?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -777,7 +777,7 @@ export type SimposiumUncheckedUpdateWithoutAdminInput = {
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedUpdateManyWithoutSimposiumNestedInput
 }
 
-export type SimposiumUncheckedUpdateManyWithoutAdminInput = {
+export type SimposiumUncheckedUpdateManyWithoutAdminSimposiumInput = {
   idSimposium?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_comienzo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -840,10 +840,10 @@ export type SimposiumSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   fecha_comienzo?: boolean
   fecha_acabado?: boolean
   capacidad_asistentes?: boolean
-  adminID?: boolean
+  adminSimposiumID?: boolean
   AlumnoInscritoSimposium?: boolean | Prisma.Simposium$AlumnoInscritoSimposiumArgs<ExtArgs>
   Evento?: boolean | Prisma.Simposium$EventoArgs<ExtArgs>
-  Admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
+  AdminSimposium?: boolean | Prisma.AdminSimposiumDefaultArgs<ExtArgs>
   StaffTrabajaEnSimposium?: boolean | Prisma.Simposium$StaffTrabajaEnSimposiumArgs<ExtArgs>
   _count?: boolean | Prisma.SimposiumCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["simposium"]>
@@ -856,14 +856,14 @@ export type SimposiumSelectScalar = {
   fecha_comienzo?: boolean
   fecha_acabado?: boolean
   capacidad_asistentes?: boolean
-  adminID?: boolean
+  adminSimposiumID?: boolean
 }
 
-export type SimposiumOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idSimposium" | "nombre" | "fecha_comienzo" | "fecha_acabado" | "capacidad_asistentes" | "adminID", ExtArgs["result"]["simposium"]>
+export type SimposiumOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idSimposium" | "nombre" | "fecha_comienzo" | "fecha_acabado" | "capacidad_asistentes" | "adminSimposiumID", ExtArgs["result"]["simposium"]>
 export type SimposiumInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   AlumnoInscritoSimposium?: boolean | Prisma.Simposium$AlumnoInscritoSimposiumArgs<ExtArgs>
   Evento?: boolean | Prisma.Simposium$EventoArgs<ExtArgs>
-  Admin?: boolean | Prisma.AdminDefaultArgs<ExtArgs>
+  AdminSimposium?: boolean | Prisma.AdminSimposiumDefaultArgs<ExtArgs>
   StaffTrabajaEnSimposium?: boolean | Prisma.Simposium$StaffTrabajaEnSimposiumArgs<ExtArgs>
   _count?: boolean | Prisma.SimposiumCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -873,7 +873,7 @@ export type $SimposiumPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     AlumnoInscritoSimposium: Prisma.$AlumnoInscritoSimposiumPayload<ExtArgs>[]
     Evento: Prisma.$EventoPayload<ExtArgs>[]
-    Admin: Prisma.$AdminPayload<ExtArgs>
+    AdminSimposium: Prisma.$AdminSimposiumPayload<ExtArgs>
     StaffTrabajaEnSimposium: Prisma.$StaffTrabajaEnSimposiumPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -882,7 +882,7 @@ export type $SimposiumPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     fecha_comienzo: Date
     fecha_acabado: Date
     capacidad_asistentes: number
-    adminID: number
+    adminSimposiumID: number
   }, ExtArgs["result"]["simposium"]>
   composites: {}
 }
@@ -1225,7 +1225,7 @@ export interface Prisma__SimposiumClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   AlumnoInscritoSimposium<T extends Prisma.Simposium$AlumnoInscritoSimposiumArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Simposium$AlumnoInscritoSimposiumArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlumnoInscritoSimposiumPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Evento<T extends Prisma.Simposium$EventoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Simposium$EventoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Admin<T extends Prisma.AdminDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminDefaultArgs<ExtArgs>>): Prisma.Prisma__AdminClient<runtime.Types.Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  AdminSimposium<T extends Prisma.AdminSimposiumDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminSimposiumDefaultArgs<ExtArgs>>): Prisma.Prisma__AdminSimposiumClient<runtime.Types.Result.GetResult<Prisma.$AdminSimposiumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   StaffTrabajaEnSimposium<T extends Prisma.Simposium$StaffTrabajaEnSimposiumArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Simposium$StaffTrabajaEnSimposiumArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffTrabajaEnSimposiumPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1261,7 +1261,7 @@ export interface SimposiumFieldRefs {
   readonly fecha_comienzo: Prisma.FieldRef<"Simposium", 'DateTime'>
   readonly fecha_acabado: Prisma.FieldRef<"Simposium", 'DateTime'>
   readonly capacidad_asistentes: Prisma.FieldRef<"Simposium", 'Int'>
-  readonly adminID: Prisma.FieldRef<"Simposium", 'Int'>
+  readonly adminSimposiumID: Prisma.FieldRef<"Simposium", 'Int'>
 }
     
 
