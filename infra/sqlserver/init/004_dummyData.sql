@@ -20,11 +20,11 @@ INSERT INTO Alumno (matricula, nombre, telefono, semestre, email, nombre_carrera
 ('21400007', 'Rodrigo Pérez Núñez',      NULL,         1, 'rodrigo.perez@cetys.edu.mx',  'Ingeniería en Computación'),
 ('21400008', 'Isabella Morales Díaz',    '6868889900', 7, 'isabella.morales@itm.edu.mx', 'Ingeniería en Sistemas Computacionales');
 
-INSERT INTO Admin (nombre, telefono, email) VALUES
+INSERT INTO AdminSimposium (nombre, telefono, email) VALUES
 ('Laura Gómez Ibarra',    '6861234567', 'laura.gomez@simposium.mx'),
 ('Fernando Ríos Salazar', '6867654321', 'fernando.rios@simposium.mx');
 
-INSERT INTO Simposium (nombre, fecha_comienzo, fecha_acabado, capacidad_asistentes, adminID) VALUES
+INSERT INTO Simposium (nombre, fecha_comienzo, fecha_acabado, capacidad_asistentes, adminSimposiumID) VALUES
 ('Simposium de Innovación Tecnológica 2025', '2025-09-10', '2025-09-12', 6, 1),
 ('Foro de Ingeniería y Negocios 2025',       '2025-10-20', '2025-10-21', 4, 2);
 
