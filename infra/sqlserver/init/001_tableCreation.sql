@@ -41,14 +41,14 @@ CREATE TABLE Alumno (
     CONSTRAINT CK_Alumno_Semestre CHECK (semestre BETWEEN 1 AND 8)
 );
 
-CREATE TABLE Admin (
-    adminID INT NOT NULL IDENTITY(1,1),
+CREATE TABLE AdminSimposium (
+    adminSimposiumID INT NOT NULL IDENTITY(1,1),
     nombre VARCHAR(120) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     email VARCHAR(150) NOT NULL,
  
-    CONSTRAINT PK_Admin PRIMARY KEY (adminID),
-    CONSTRAINT UQ_Admin_Email UNIQUE (email)
+    CONSTRAINT PK_AdminSimposium PRIMARY KEY (adminSimposiumID),
+    CONSTRAINT UQ_AdminSimposium_Email UNIQUE (email)
 );
 
 CREATE TABLE Simposium (
@@ -57,11 +57,11 @@ CREATE TABLE Simposium (
     fecha_comienzo DATE NOT NULL,
     fecha_acabado DATE NOT NULL,
     capacidad_asistentes INT NOT NULL,
-    adminID INT NOT NULL,
+    adminSimposiumID INT NOT NULL,
  
     CONSTRAINT PK_Simposium PRIMARY KEY (idSimposium),
-    CONSTRAINT FK_Simposium_Admin FOREIGN KEY (adminID)
-        REFERENCES Admin(adminID)
+    CONSTRAINT FK_Simposium_AdminSimposium FOREIGN KEY (adminSimposiumID)
+        REFERENCES AdminSimposium(adminSimposiumID)
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT CK_Simposium_Fechas CHECK (fecha_acabado >= fecha_comienzo),
@@ -132,21 +132,4 @@ CREATE TABLE AlumnoInscritoSimposium (
         REFERENCES Simposium(idSimposium)
         ON UPDATE NO ACTION
         ON DELETE CASCADE
-);
-
-CREATE TABLE AlumnoAsistioEvento (
-    matricula VARCHAR(15) NOT NULL,
-    idEvento INT NOT NULL,
-    fecha_llegada DATETIME NOT NULL,
-    fecha_salida DATETIME NULL,
-
-    CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (matricula, idEvento),
-    CONSTRAINT FK_AlumnoAsistio_Alumno FOREIGN KEY (matricula)
-        REFERENCES Alumno(matricula)
-        ON UPDATE CASCADE
-        ON DELETE NO ACTION,
-    CONSTRAINT FK_AlumnoAsistio_Evento FOREIGN KEY (idEvento)
-        REFERENCES Evento(idEvento)
-        ON UPDATE NO ACTION
-        ON DELETE CASCADE,
 );
