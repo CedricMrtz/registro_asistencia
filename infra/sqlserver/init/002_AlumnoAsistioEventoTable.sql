@@ -10,8 +10,6 @@ CREATE TABLE AlumnoAsistioEvento (
     staffID INT NULL,
 
     CONSTRAINT PK_AlumnoAsistioEvento PRIMARY KEY (idAsistencia),
-
-    CREATE INDEX IX_AlumnoEvento ON AlumnoAsistioEvento(matricula, idEvento);
     
     CONSTRAINT FK_AlumnoAsistio_Alumno 
         FOREIGN KEY (matricula)
