@@ -192,12 +192,14 @@ export type StaffWhereInput = {
   NOT?: Prisma.StaffWhereInput | Prisma.StaffWhereInput[]
   staffID?: Prisma.IntFilter<"Staff"> | number
   nombre?: Prisma.StringFilter<"Staff"> | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoListRelationFilter
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumListRelationFilter
 }
 
 export type StaffOrderByWithRelationInput = {
   staffID?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoOrderByRelationAggregateInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumOrderByRelationAggregateInput
 }
 
@@ -207,6 +209,7 @@ export type StaffWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.StaffWhereInput[]
   NOT?: Prisma.StaffWhereInput | Prisma.StaffWhereInput[]
   nombre?: Prisma.StringFilter<"Staff"> | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoListRelationFilter
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumListRelationFilter
 }, "staffID">
 
@@ -230,23 +233,27 @@ export type StaffScalarWhereWithAggregatesInput = {
 
 export type StaffCreateInput = {
   nombre: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutStaffInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUncheckedCreateInput = {
   staffID?: number
   nombre: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutStaffInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutStaffNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffUncheckedUpdateInput = {
   staffID?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutStaffNestedInput
   StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedUpdateManyWithoutStaffNestedInput
 }
 
@@ -291,6 +298,11 @@ export type StaffScalarRelationFilter = {
   isNot?: Prisma.StaffWhereInput
 }
 
+export type StaffNullableScalarRelationFilter = {
+  is?: Prisma.StaffWhereInput | null
+  isNot?: Prisma.StaffWhereInput | null
+}
+
 export type StaffCreateNestedOneWithoutStaffTrabajaEnSimposiumInput = {
   create?: Prisma.XOR<Prisma.StaffCreateWithoutStaffTrabajaEnSimposiumInput, Prisma.StaffUncheckedCreateWithoutStaffTrabajaEnSimposiumInput>
   connectOrCreate?: Prisma.StaffCreateOrConnectWithoutStaffTrabajaEnSimposiumInput
@@ -305,13 +317,31 @@ export type StaffUpdateOneRequiredWithoutStaffTrabajaEnSimposiumNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StaffUpdateToOneWithWhereWithoutStaffTrabajaEnSimposiumInput, Prisma.StaffUpdateWithoutStaffTrabajaEnSimposiumInput>, Prisma.StaffUncheckedUpdateWithoutStaffTrabajaEnSimposiumInput>
 }
 
+export type StaffCreateNestedOneWithoutAlumnoAsistioEventoInput = {
+  create?: Prisma.XOR<Prisma.StaffCreateWithoutAlumnoAsistioEventoInput, Prisma.StaffUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutAlumnoAsistioEventoInput
+  connect?: Prisma.StaffWhereUniqueInput
+}
+
+export type StaffUpdateOneWithoutAlumnoAsistioEventoNestedInput = {
+  create?: Prisma.XOR<Prisma.StaffCreateWithoutAlumnoAsistioEventoInput, Prisma.StaffUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutAlumnoAsistioEventoInput
+  upsert?: Prisma.StaffUpsertWithoutAlumnoAsistioEventoInput
+  disconnect?: Prisma.StaffWhereInput | boolean
+  delete?: Prisma.StaffWhereInput | boolean
+  connect?: Prisma.StaffWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StaffUpdateToOneWithWhereWithoutAlumnoAsistioEventoInput, Prisma.StaffUpdateWithoutAlumnoAsistioEventoInput>, Prisma.StaffUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+}
+
 export type StaffCreateWithoutStaffTrabajaEnSimposiumInput = {
   nombre: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUncheckedCreateWithoutStaffTrabajaEnSimposiumInput = {
   staffID?: number
   nombre: string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedCreateNestedManyWithoutStaffInput
 }
 
 export type StaffCreateOrConnectWithoutStaffTrabajaEnSimposiumInput = {
@@ -332,11 +362,51 @@ export type StaffUpdateToOneWithWhereWithoutStaffTrabajaEnSimposiumInput = {
 
 export type StaffUpdateWithoutStaffTrabajaEnSimposiumInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffUncheckedUpdateWithoutStaffTrabajaEnSimposiumInput = {
   staffID?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  AlumnoAsistioEvento?: Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutStaffNestedInput
+}
+
+export type StaffCreateWithoutAlumnoAsistioEventoInput = {
+  nombre: string
+  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumCreateNestedManyWithoutStaffInput
+}
+
+export type StaffUncheckedCreateWithoutAlumnoAsistioEventoInput = {
+  staffID?: number
+  nombre: string
+  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedCreateNestedManyWithoutStaffInput
+}
+
+export type StaffCreateOrConnectWithoutAlumnoAsistioEventoInput = {
+  where: Prisma.StaffWhereUniqueInput
+  create: Prisma.XOR<Prisma.StaffCreateWithoutAlumnoAsistioEventoInput, Prisma.StaffUncheckedCreateWithoutAlumnoAsistioEventoInput>
+}
+
+export type StaffUpsertWithoutAlumnoAsistioEventoInput = {
+  update: Prisma.XOR<Prisma.StaffUpdateWithoutAlumnoAsistioEventoInput, Prisma.StaffUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+  create: Prisma.XOR<Prisma.StaffCreateWithoutAlumnoAsistioEventoInput, Prisma.StaffUncheckedCreateWithoutAlumnoAsistioEventoInput>
+  where?: Prisma.StaffWhereInput
+}
+
+export type StaffUpdateToOneWithWhereWithoutAlumnoAsistioEventoInput = {
+  where?: Prisma.StaffWhereInput
+  data: Prisma.XOR<Prisma.StaffUpdateWithoutAlumnoAsistioEventoInput, Prisma.StaffUncheckedUpdateWithoutAlumnoAsistioEventoInput>
+}
+
+export type StaffUpdateWithoutAlumnoAsistioEventoInput = {
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUpdateManyWithoutStaffNestedInput
+}
+
+export type StaffUncheckedUpdateWithoutAlumnoAsistioEventoInput = {
+  staffID?: Prisma.IntFieldUpdateOperationsInput | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  StaffTrabajaEnSimposium?: Prisma.StaffTrabajaEnSimposiumUncheckedUpdateManyWithoutStaffNestedInput
 }
 
 
@@ -345,10 +415,12 @@ export type StaffUncheckedUpdateWithoutStaffTrabajaEnSimposiumInput = {
  */
 
 export type StaffCountOutputType = {
+  AlumnoAsistioEvento: number
   StaffTrabajaEnSimposium: number
 }
 
 export type StaffCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AlumnoAsistioEvento?: boolean | StaffCountOutputTypeCountAlumnoAsistioEventoArgs
   StaffTrabajaEnSimposium?: boolean | StaffCountOutputTypeCountStaffTrabajaEnSimposiumArgs
 }
 
@@ -365,6 +437,13 @@ export type StaffCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * StaffCountOutputType without action
  */
+export type StaffCountOutputTypeCountAlumnoAsistioEventoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AlumnoAsistioEventoWhereInput
+}
+
+/**
+ * StaffCountOutputType without action
+ */
 export type StaffCountOutputTypeCountStaffTrabajaEnSimposiumArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StaffTrabajaEnSimposiumWhereInput
 }
@@ -373,6 +452,7 @@ export type StaffCountOutputTypeCountStaffTrabajaEnSimposiumArgs<ExtArgs extends
 export type StaffSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   staffID?: boolean
   nombre?: boolean
+  AlumnoAsistioEvento?: boolean | Prisma.Staff$AlumnoAsistioEventoArgs<ExtArgs>
   StaffTrabajaEnSimposium?: boolean | Prisma.Staff$StaffTrabajaEnSimposiumArgs<ExtArgs>
   _count?: boolean | Prisma.StaffCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["staff"]>
@@ -386,6 +466,7 @@ export type StaffSelectScalar = {
 
 export type StaffOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"staffID" | "nombre", ExtArgs["result"]["staff"]>
 export type StaffInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AlumnoAsistioEvento?: boolean | Prisma.Staff$AlumnoAsistioEventoArgs<ExtArgs>
   StaffTrabajaEnSimposium?: boolean | Prisma.Staff$StaffTrabajaEnSimposiumArgs<ExtArgs>
   _count?: boolean | Prisma.StaffCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -393,6 +474,7 @@ export type StaffInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type $StaffPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Staff"
   objects: {
+    AlumnoAsistioEvento: Prisma.$AlumnoAsistioEventoPayload<ExtArgs>[]
     StaffTrabajaEnSimposium: Prisma.$StaffTrabajaEnSimposiumPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -738,6 +820,7 @@ readonly fields: StaffFieldRefs;
  */
 export interface Prisma__StaffClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  AlumnoAsistioEvento<T extends Prisma.Staff$AlumnoAsistioEventoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Staff$AlumnoAsistioEventoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlumnoAsistioEventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   StaffTrabajaEnSimposium<T extends Prisma.Staff$StaffTrabajaEnSimposiumArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Staff$StaffTrabajaEnSimposiumArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffTrabajaEnSimposiumPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1114,6 +1197,30 @@ export type StaffDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Staff to delete.
    */
   limit?: number
+}
+
+/**
+ * Staff.AlumnoAsistioEvento
+ */
+export type Staff$AlumnoAsistioEventoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AlumnoAsistioEvento
+   */
+  select?: Prisma.AlumnoAsistioEventoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AlumnoAsistioEvento
+   */
+  omit?: Prisma.AlumnoAsistioEventoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AlumnoAsistioEventoInclude<ExtArgs> | null
+  where?: Prisma.AlumnoAsistioEventoWhereInput
+  orderBy?: Prisma.AlumnoAsistioEventoOrderByWithRelationInput | Prisma.AlumnoAsistioEventoOrderByWithRelationInput[]
+  cursor?: Prisma.AlumnoAsistioEventoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AlumnoAsistioEventoScalarFieldEnum | Prisma.AlumnoAsistioEventoScalarFieldEnum[]
 }
 
 /**

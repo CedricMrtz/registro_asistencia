@@ -13,6 +13,6 @@ export interface Simposium {
   fecha_comienzo: Date;
   fecha_acabado: Date;
   capacidad_asistentes: number;
-  adminID: number;
+  adminSimposiumID: number;
   Evento: Event[];
 }

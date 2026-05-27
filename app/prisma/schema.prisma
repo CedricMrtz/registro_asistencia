@@ -70,6 +70,7 @@ model Evento {
 model Staff {
   staffID                 Int                       @id(map: "PK_Staff") @default(autoincrement())
   nombre                  String                    @db.VarChar(120)
+  AlumnoAsistioEvento     AlumnoAsistioEvento[]
   StaffTrabajaEnSimposium StaffTrabajaEnSimposium[]
 }
 
@@ -96,12 +97,15 @@ model AdminSimposium {
 }
 
 model AlumnoAsistioEvento {
+  idAsistencia  Int       @id(map: "PK_AlumnoAsistioEvento") @default(autoincrement())
   matricula     String    @db.VarChar(15)
   idEvento      Int
   fecha_llegada DateTime  @db.DateTime
   fecha_salida  DateTime? @db.DateTime
+  staffID       Int?
   Alumno        Alumno    @relation(fields: [matricula], references: [matricula], map: "FK_AlumnoAsistio_Alumno")
   Evento        Evento    @relation(fields: [idEvento], references: [idEvento], onDelete: Cascade, onUpdate: NoAction, map: "FK_AlumnoAsistio_Evento")
+  Staff         Staff?    @relation(fields: [staffID], references: [staffID], onDelete: Cascade, onUpdate: NoAction, map: "FK_AlumnoAsistio_Staff")
 
-  @@id([matricula, idEvento], map: "PK_AlumnoAsistioEvento")
+  @@index([matricula, idEvento], map: "IX_AlumnoEvento")
 }
