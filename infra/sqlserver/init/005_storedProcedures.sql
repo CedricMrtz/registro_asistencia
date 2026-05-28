@@ -11,7 +11,7 @@ CREATE PROCEDURE sp_GetDatosAsistencia @idSimposium INT AS BEGIN
         a.semestre,
         a.email,
         a.nombre_carrera,
-        c.siglas
+        c.siglas,
         e.nombre_escuela,
         e.ciudad
     FROM Alumno a
@@ -59,7 +59,7 @@ CREATE PROCEDURE sp_GetDatosCumplimiento @idSimposium INT AS BEGIN
         a.semestre,
         a.email,
         a.nombre_carrera,
-        c.siglas
+        c.siglas,
         e.nombre_escuela,
         e.ciudad
     FROM Alumno a
