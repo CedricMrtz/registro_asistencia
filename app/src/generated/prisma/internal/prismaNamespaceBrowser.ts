@@ -176,10 +176,12 @@ export type AdminSimposiumScalarFieldEnum = (typeof AdminSimposiumScalarFieldEnu
 
 
 export const AlumnoAsistioEventoScalarFieldEnum = {
+  idAsistencia: 'idAsistencia',
   matricula: 'matricula',
   idEvento: 'idEvento',
   fecha_llegada: 'fecha_llegada',
-  fecha_salida: 'fecha_salida'
+  fecha_salida: 'fecha_salida',
+  staffID: 'staffID'
 } as const
 
 export type AlumnoAsistioEventoScalarFieldEnum = (typeof AlumnoAsistioEventoScalarFieldEnum)[keyof typeof AlumnoAsistioEventoScalarFieldEnum]

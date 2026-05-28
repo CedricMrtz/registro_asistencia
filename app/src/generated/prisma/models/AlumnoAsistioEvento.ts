@@ -27,63 +27,83 @@ export type AggregateAlumnoAsistioEvento = {
 }
 
 export type AlumnoAsistioEventoAvgAggregateOutputType = {
+  idAsistencia: number | null
   idEvento: number | null
+  staffID: number | null
 }
 
 export type AlumnoAsistioEventoSumAggregateOutputType = {
+  idAsistencia: number | null
   idEvento: number | null
+  staffID: number | null
 }
 
 export type AlumnoAsistioEventoMinAggregateOutputType = {
+  idAsistencia: number | null
   matricula: string | null
   idEvento: number | null
   fecha_llegada: Date | null
   fecha_salida: Date | null
+  staffID: number | null
 }
 
 export type AlumnoAsistioEventoMaxAggregateOutputType = {
+  idAsistencia: number | null
   matricula: string | null
   idEvento: number | null
   fecha_llegada: Date | null
   fecha_salida: Date | null
+  staffID: number | null
 }
 
 export type AlumnoAsistioEventoCountAggregateOutputType = {
+  idAsistencia: number
   matricula: number
   idEvento: number
   fecha_llegada: number
   fecha_salida: number
+  staffID: number
   _all: number
 }
 
 
 export type AlumnoAsistioEventoAvgAggregateInputType = {
+  idAsistencia?: true
   idEvento?: true
+  staffID?: true
 }
 
 export type AlumnoAsistioEventoSumAggregateInputType = {
+  idAsistencia?: true
   idEvento?: true
+  staffID?: true
 }
 
 export type AlumnoAsistioEventoMinAggregateInputType = {
+  idAsistencia?: true
   matricula?: true
   idEvento?: true
   fecha_llegada?: true
   fecha_salida?: true
+  staffID?: true
 }
 
 export type AlumnoAsistioEventoMaxAggregateInputType = {
+  idAsistencia?: true
   matricula?: true
   idEvento?: true
   fecha_llegada?: true
   fecha_salida?: true
+  staffID?: true
 }
 
 export type AlumnoAsistioEventoCountAggregateInputType = {
+  idAsistencia?: true
   matricula?: true
   idEvento?: true
   fecha_llegada?: true
   fecha_salida?: true
+  staffID?: true
   _all?: true
 }
 
@@ -174,10 +194,12 @@ export type AlumnoAsistioEventoGroupByArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 export type AlumnoAsistioEventoGroupByOutputType = {
+  idAsistencia: number
   matricula: string
   idEvento: number
   fecha_llegada: Date
   fecha_salida: Date | null
+  staffID: number | null
   _count: AlumnoAsistioEventoCountAggregateOutputType | null
   _avg: AlumnoAsistioEventoAvgAggregateOutputType | null
   _sum: AlumnoAsistioEventoSumAggregateOutputType | null
@@ -204,25 +226,31 @@ export type AlumnoAsistioEventoWhereInput = {
   AND?: Prisma.AlumnoAsistioEventoWhereInput | Prisma.AlumnoAsistioEventoWhereInput[]
   OR?: Prisma.AlumnoAsistioEventoWhereInput[]
   NOT?: Prisma.AlumnoAsistioEventoWhereInput | Prisma.AlumnoAsistioEventoWhereInput[]
+  idAsistencia?: Prisma.IntFilter<"AlumnoAsistioEvento"> | number
   matricula?: Prisma.StringFilter<"AlumnoAsistioEvento"> | string
   idEvento?: Prisma.IntFilter<"AlumnoAsistioEvento"> | number
   fecha_llegada?: Prisma.DateTimeFilter<"AlumnoAsistioEvento"> | Date | string
   fecha_salida?: Prisma.DateTimeNullableFilter<"AlumnoAsistioEvento"> | Date | string | null
+  staffID?: Prisma.IntNullableFilter<"AlumnoAsistioEvento"> | number | null
   Alumno?: Prisma.XOR<Prisma.AlumnoScalarRelationFilter, Prisma.AlumnoWhereInput>
   Evento?: Prisma.XOR<Prisma.EventoScalarRelationFilter, Prisma.EventoWhereInput>
+  Staff?: Prisma.XOR<Prisma.StaffNullableScalarRelationFilter, Prisma.StaffWhereInput> | null
 }
 
 export type AlumnoAsistioEventoOrderByWithRelationInput = {
+  idAsistencia?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
   fecha_llegada?: Prisma.SortOrder
   fecha_salida?: Prisma.SortOrderInput | Prisma.SortOrder
+  staffID?: Prisma.SortOrderInput | Prisma.SortOrder
   Alumno?: Prisma.AlumnoOrderByWithRelationInput
   Evento?: Prisma.EventoOrderByWithRelationInput
+  Staff?: Prisma.StaffOrderByWithRelationInput
 }
 
 export type AlumnoAsistioEventoWhereUniqueInput = Prisma.AtLeast<{
-  matricula_idEvento?: Prisma.AlumnoAsistioEventoMatriculaIdEventoCompoundUniqueInput
+  idAsistencia?: number
   AND?: Prisma.AlumnoAsistioEventoWhereInput | Prisma.AlumnoAsistioEventoWhereInput[]
   OR?: Prisma.AlumnoAsistioEventoWhereInput[]
   NOT?: Prisma.AlumnoAsistioEventoWhereInput | Prisma.AlumnoAsistioEventoWhereInput[]
@@ -230,15 +258,19 @@ export type AlumnoAsistioEventoWhereUniqueInput = Prisma.AtLeast<{
   idEvento?: Prisma.IntFilter<"AlumnoAsistioEvento"> | number
   fecha_llegada?: Prisma.DateTimeFilter<"AlumnoAsistioEvento"> | Date | string
   fecha_salida?: Prisma.DateTimeNullableFilter<"AlumnoAsistioEvento"> | Date | string | null
+  staffID?: Prisma.IntNullableFilter<"AlumnoAsistioEvento"> | number | null
   Alumno?: Prisma.XOR<Prisma.AlumnoScalarRelationFilter, Prisma.AlumnoWhereInput>
   Evento?: Prisma.XOR<Prisma.EventoScalarRelationFilter, Prisma.EventoWhereInput>
-}, "matricula_idEvento">
+  Staff?: Prisma.XOR<Prisma.StaffNullableScalarRelationFilter, Prisma.StaffWhereInput> | null
+}, "idAsistencia">
 
 export type AlumnoAsistioEventoOrderByWithAggregationInput = {
+  idAsistencia?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
   fecha_llegada?: Prisma.SortOrder
   fecha_salida?: Prisma.SortOrderInput | Prisma.SortOrder
+  staffID?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AlumnoAsistioEventoCountOrderByAggregateInput
   _avg?: Prisma.AlumnoAsistioEventoAvgOrderByAggregateInput
   _max?: Prisma.AlumnoAsistioEventoMaxOrderByAggregateInput
@@ -250,10 +282,12 @@ export type AlumnoAsistioEventoScalarWhereWithAggregatesInput = {
   AND?: Prisma.AlumnoAsistioEventoScalarWhereWithAggregatesInput | Prisma.AlumnoAsistioEventoScalarWhereWithAggregatesInput[]
   OR?: Prisma.AlumnoAsistioEventoScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AlumnoAsistioEventoScalarWhereWithAggregatesInput | Prisma.AlumnoAsistioEventoScalarWhereWithAggregatesInput[]
+  idAsistencia?: Prisma.IntWithAggregatesFilter<"AlumnoAsistioEvento"> | number
   matricula?: Prisma.StringWithAggregatesFilter<"AlumnoAsistioEvento"> | string
   idEvento?: Prisma.IntWithAggregatesFilter<"AlumnoAsistioEvento"> | number
   fecha_llegada?: Prisma.DateTimeWithAggregatesFilter<"AlumnoAsistioEvento"> | Date | string
   fecha_salida?: Prisma.DateTimeNullableWithAggregatesFilter<"AlumnoAsistioEvento"> | Date | string | null
+  staffID?: Prisma.IntNullableWithAggregatesFilter<"AlumnoAsistioEvento"> | number | null
 }
 
 export type AlumnoAsistioEventoCreateInput = {
@@ -261,13 +295,16 @@ export type AlumnoAsistioEventoCreateInput = {
   fecha_salida?: Date | string | null
   Alumno: Prisma.AlumnoCreateNestedOneWithoutAlumnoAsistioEventoInput
   Evento: Prisma.EventoCreateNestedOneWithoutAlumnoAsistioEventoInput
+  Staff?: Prisma.StaffCreateNestedOneWithoutAlumnoAsistioEventoInput
 }
 
 export type AlumnoAsistioEventoUncheckedCreateInput = {
+  idAsistencia?: number
   matricula: string
   idEvento: number
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
+  staffID?: number | null
 }
 
 export type AlumnoAsistioEventoUpdateInput = {
@@ -275,13 +312,16 @@ export type AlumnoAsistioEventoUpdateInput = {
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Alumno?: Prisma.AlumnoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput
   Evento?: Prisma.EventoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput
+  Staff?: Prisma.StaffUpdateOneWithoutAlumnoAsistioEventoNestedInput
 }
 
 export type AlumnoAsistioEventoUncheckedUpdateInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
   idEvento?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  staffID?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AlumnoAsistioEventoCreateManyInput = {
@@ -289,6 +329,7 @@ export type AlumnoAsistioEventoCreateManyInput = {
   idEvento: number
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
+  staffID?: number | null
 }
 
 export type AlumnoAsistioEventoUpdateManyMutationInput = {
@@ -297,10 +338,12 @@ export type AlumnoAsistioEventoUpdateManyMutationInput = {
 }
 
 export type AlumnoAsistioEventoUncheckedUpdateManyInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
   idEvento?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  staffID?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AlumnoAsistioEventoListRelationFilter = {
@@ -313,38 +356,43 @@ export type AlumnoAsistioEventoOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type AlumnoAsistioEventoMatriculaIdEventoCompoundUniqueInput = {
-  matricula: string
-  idEvento: number
-}
-
 export type AlumnoAsistioEventoCountOrderByAggregateInput = {
+  idAsistencia?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
   fecha_llegada?: Prisma.SortOrder
   fecha_salida?: Prisma.SortOrder
+  staffID?: Prisma.SortOrder
 }
 
 export type AlumnoAsistioEventoAvgOrderByAggregateInput = {
+  idAsistencia?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
+  staffID?: Prisma.SortOrder
 }
 
 export type AlumnoAsistioEventoMaxOrderByAggregateInput = {
+  idAsistencia?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
   fecha_llegada?: Prisma.SortOrder
   fecha_salida?: Prisma.SortOrder
+  staffID?: Prisma.SortOrder
 }
 
 export type AlumnoAsistioEventoMinOrderByAggregateInput = {
+  idAsistencia?: Prisma.SortOrder
   matricula?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
   fecha_llegada?: Prisma.SortOrder
   fecha_salida?: Prisma.SortOrder
+  staffID?: Prisma.SortOrder
 }
 
 export type AlumnoAsistioEventoSumOrderByAggregateInput = {
+  idAsistencia?: Prisma.SortOrder
   idEvento?: Prisma.SortOrder
+  staffID?: Prisma.SortOrder
 }
 
 export type AlumnoAsistioEventoCreateNestedManyWithoutAlumnoInput = {
@@ -431,20 +479,73 @@ export type AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoNestedInput = {
   deleteMany?: Prisma.AlumnoAsistioEventoScalarWhereInput | Prisma.AlumnoAsistioEventoScalarWhereInput[]
 }
 
+export type AlumnoAsistioEventoCreateNestedManyWithoutStaffInput = {
+  create?: Prisma.XOR<Prisma.AlumnoAsistioEventoCreateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput> | Prisma.AlumnoAsistioEventoCreateWithoutStaffInput[] | Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput | Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput[]
+  createMany?: Prisma.AlumnoAsistioEventoCreateManyStaffInputEnvelope
+  connect?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+}
+
+export type AlumnoAsistioEventoUncheckedCreateNestedManyWithoutStaffInput = {
+  create?: Prisma.XOR<Prisma.AlumnoAsistioEventoCreateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput> | Prisma.AlumnoAsistioEventoCreateWithoutStaffInput[] | Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput | Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput[]
+  createMany?: Prisma.AlumnoAsistioEventoCreateManyStaffInputEnvelope
+  connect?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+}
+
+export type AlumnoAsistioEventoUpdateManyWithoutStaffNestedInput = {
+  create?: Prisma.XOR<Prisma.AlumnoAsistioEventoCreateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput> | Prisma.AlumnoAsistioEventoCreateWithoutStaffInput[] | Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput | Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput[]
+  upsert?: Prisma.AlumnoAsistioEventoUpsertWithWhereUniqueWithoutStaffInput | Prisma.AlumnoAsistioEventoUpsertWithWhereUniqueWithoutStaffInput[]
+  createMany?: Prisma.AlumnoAsistioEventoCreateManyStaffInputEnvelope
+  set?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  disconnect?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  delete?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  connect?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  update?: Prisma.AlumnoAsistioEventoUpdateWithWhereUniqueWithoutStaffInput | Prisma.AlumnoAsistioEventoUpdateWithWhereUniqueWithoutStaffInput[]
+  updateMany?: Prisma.AlumnoAsistioEventoUpdateManyWithWhereWithoutStaffInput | Prisma.AlumnoAsistioEventoUpdateManyWithWhereWithoutStaffInput[]
+  deleteMany?: Prisma.AlumnoAsistioEventoScalarWhereInput | Prisma.AlumnoAsistioEventoScalarWhereInput[]
+}
+
+export type AlumnoAsistioEventoUncheckedUpdateManyWithoutStaffNestedInput = {
+  create?: Prisma.XOR<Prisma.AlumnoAsistioEventoCreateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput> | Prisma.AlumnoAsistioEventoCreateWithoutStaffInput[] | Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput | Prisma.AlumnoAsistioEventoCreateOrConnectWithoutStaffInput[]
+  upsert?: Prisma.AlumnoAsistioEventoUpsertWithWhereUniqueWithoutStaffInput | Prisma.AlumnoAsistioEventoUpsertWithWhereUniqueWithoutStaffInput[]
+  createMany?: Prisma.AlumnoAsistioEventoCreateManyStaffInputEnvelope
+  set?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  disconnect?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  delete?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  connect?: Prisma.AlumnoAsistioEventoWhereUniqueInput | Prisma.AlumnoAsistioEventoWhereUniqueInput[]
+  update?: Prisma.AlumnoAsistioEventoUpdateWithWhereUniqueWithoutStaffInput | Prisma.AlumnoAsistioEventoUpdateWithWhereUniqueWithoutStaffInput[]
+  updateMany?: Prisma.AlumnoAsistioEventoUpdateManyWithWhereWithoutStaffInput | Prisma.AlumnoAsistioEventoUpdateManyWithWhereWithoutStaffInput[]
+  deleteMany?: Prisma.AlumnoAsistioEventoScalarWhereInput | Prisma.AlumnoAsistioEventoScalarWhereInput[]
+}
+
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type AlumnoAsistioEventoCreateWithoutAlumnoInput = {
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
   Evento: Prisma.EventoCreateNestedOneWithoutAlumnoAsistioEventoInput
+  Staff?: Prisma.StaffCreateNestedOneWithoutAlumnoAsistioEventoInput
 }
 
 export type AlumnoAsistioEventoUncheckedCreateWithoutAlumnoInput = {
+  idAsistencia?: number
   idEvento: number
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
+  staffID?: number | null
 }
 
 export type AlumnoAsistioEventoCreateOrConnectWithoutAlumnoInput = {
@@ -476,22 +577,27 @@ export type AlumnoAsistioEventoScalarWhereInput = {
   AND?: Prisma.AlumnoAsistioEventoScalarWhereInput | Prisma.AlumnoAsistioEventoScalarWhereInput[]
   OR?: Prisma.AlumnoAsistioEventoScalarWhereInput[]
   NOT?: Prisma.AlumnoAsistioEventoScalarWhereInput | Prisma.AlumnoAsistioEventoScalarWhereInput[]
+  idAsistencia?: Prisma.IntFilter<"AlumnoAsistioEvento"> | number
   matricula?: Prisma.StringFilter<"AlumnoAsistioEvento"> | string
   idEvento?: Prisma.IntFilter<"AlumnoAsistioEvento"> | number
   fecha_llegada?: Prisma.DateTimeFilter<"AlumnoAsistioEvento"> | Date | string
   fecha_salida?: Prisma.DateTimeNullableFilter<"AlumnoAsistioEvento"> | Date | string | null
+  staffID?: Prisma.IntNullableFilter<"AlumnoAsistioEvento"> | number | null
 }
 
 export type AlumnoAsistioEventoCreateWithoutEventoInput = {
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
   Alumno: Prisma.AlumnoCreateNestedOneWithoutAlumnoAsistioEventoInput
+  Staff?: Prisma.StaffCreateNestedOneWithoutAlumnoAsistioEventoInput
 }
 
 export type AlumnoAsistioEventoUncheckedCreateWithoutEventoInput = {
+  idAsistencia?: number
   matricula: string
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
+  staffID?: number | null
 }
 
 export type AlumnoAsistioEventoCreateOrConnectWithoutEventoInput = {
@@ -519,50 +625,132 @@ export type AlumnoAsistioEventoUpdateManyWithWhereWithoutEventoInput = {
   data: Prisma.XOR<Prisma.AlumnoAsistioEventoUpdateManyMutationInput, Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoInput>
 }
 
+export type AlumnoAsistioEventoCreateWithoutStaffInput = {
+  fecha_llegada: Date | string
+  fecha_salida?: Date | string | null
+  Alumno: Prisma.AlumnoCreateNestedOneWithoutAlumnoAsistioEventoInput
+  Evento: Prisma.EventoCreateNestedOneWithoutAlumnoAsistioEventoInput
+}
+
+export type AlumnoAsistioEventoUncheckedCreateWithoutStaffInput = {
+  idAsistencia?: number
+  matricula: string
+  idEvento: number
+  fecha_llegada: Date | string
+  fecha_salida?: Date | string | null
+}
+
+export type AlumnoAsistioEventoCreateOrConnectWithoutStaffInput = {
+  where: Prisma.AlumnoAsistioEventoWhereUniqueInput
+  create: Prisma.XOR<Prisma.AlumnoAsistioEventoCreateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput>
+}
+
+export type AlumnoAsistioEventoCreateManyStaffInputEnvelope = {
+  data: Prisma.AlumnoAsistioEventoCreateManyStaffInput | Prisma.AlumnoAsistioEventoCreateManyStaffInput[]
+}
+
+export type AlumnoAsistioEventoUpsertWithWhereUniqueWithoutStaffInput = {
+  where: Prisma.AlumnoAsistioEventoWhereUniqueInput
+  update: Prisma.XOR<Prisma.AlumnoAsistioEventoUpdateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedUpdateWithoutStaffInput>
+  create: Prisma.XOR<Prisma.AlumnoAsistioEventoCreateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedCreateWithoutStaffInput>
+}
+
+export type AlumnoAsistioEventoUpdateWithWhereUniqueWithoutStaffInput = {
+  where: Prisma.AlumnoAsistioEventoWhereUniqueInput
+  data: Prisma.XOR<Prisma.AlumnoAsistioEventoUpdateWithoutStaffInput, Prisma.AlumnoAsistioEventoUncheckedUpdateWithoutStaffInput>
+}
+
+export type AlumnoAsistioEventoUpdateManyWithWhereWithoutStaffInput = {
+  where: Prisma.AlumnoAsistioEventoScalarWhereInput
+  data: Prisma.XOR<Prisma.AlumnoAsistioEventoUpdateManyMutationInput, Prisma.AlumnoAsistioEventoUncheckedUpdateManyWithoutStaffInput>
+}
+
 export type AlumnoAsistioEventoCreateManyAlumnoInput = {
   idEvento: number
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
+  staffID?: number | null
 }
 
 export type AlumnoAsistioEventoUpdateWithoutAlumnoInput = {
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Evento?: Prisma.EventoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput
+  Staff?: Prisma.StaffUpdateOneWithoutAlumnoAsistioEventoNestedInput
 }
 
 export type AlumnoAsistioEventoUncheckedUpdateWithoutAlumnoInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
   idEvento?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  staffID?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AlumnoAsistioEventoUncheckedUpdateManyWithoutAlumnoInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
   idEvento?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  staffID?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AlumnoAsistioEventoCreateManyEventoInput = {
   matricula: string
   fecha_llegada: Date | string
   fecha_salida?: Date | string | null
+  staffID?: number | null
 }
 
 export type AlumnoAsistioEventoUpdateWithoutEventoInput = {
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Alumno?: Prisma.AlumnoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput
+  Staff?: Prisma.StaffUpdateOneWithoutAlumnoAsistioEventoNestedInput
 }
 
 export type AlumnoAsistioEventoUncheckedUpdateWithoutEventoInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  staffID?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
+  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  staffID?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type AlumnoAsistioEventoCreateManyStaffInput = {
+  matricula: string
+  idEvento: number
+  fecha_llegada: Date | string
+  fecha_salida?: Date | string | null
+}
+
+export type AlumnoAsistioEventoUpdateWithoutStaffInput = {
+  fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Alumno?: Prisma.AlumnoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput
+  Evento?: Prisma.EventoUpdateOneRequiredWithoutAlumnoAsistioEventoNestedInput
+}
+
+export type AlumnoAsistioEventoUncheckedUpdateWithoutStaffInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
+  matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  idEvento?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoInput = {
+export type AlumnoAsistioEventoUncheckedUpdateManyWithoutStaffInput = {
+  idAsistencia?: Prisma.IntFieldUpdateOperationsInput | number
   matricula?: Prisma.StringFieldUpdateOperationsInput | string
+  idEvento?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_llegada?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fecha_salida?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -570,27 +758,33 @@ export type AlumnoAsistioEventoUncheckedUpdateManyWithoutEventoInput = {
 
 
 export type AlumnoAsistioEventoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  idAsistencia?: boolean
   matricula?: boolean
   idEvento?: boolean
   fecha_llegada?: boolean
   fecha_salida?: boolean
+  staffID?: boolean
   Alumno?: boolean | Prisma.AlumnoDefaultArgs<ExtArgs>
   Evento?: boolean | Prisma.EventoDefaultArgs<ExtArgs>
+  Staff?: boolean | Prisma.AlumnoAsistioEvento$StaffArgs<ExtArgs>
 }, ExtArgs["result"]["alumnoAsistioEvento"]>
 
 
 
 export type AlumnoAsistioEventoSelectScalar = {
+  idAsistencia?: boolean
   matricula?: boolean
   idEvento?: boolean
   fecha_llegada?: boolean
   fecha_salida?: boolean
+  staffID?: boolean
 }
 
-export type AlumnoAsistioEventoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"matricula" | "idEvento" | "fecha_llegada" | "fecha_salida", ExtArgs["result"]["alumnoAsistioEvento"]>
+export type AlumnoAsistioEventoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idAsistencia" | "matricula" | "idEvento" | "fecha_llegada" | "fecha_salida" | "staffID", ExtArgs["result"]["alumnoAsistioEvento"]>
 export type AlumnoAsistioEventoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Alumno?: boolean | Prisma.AlumnoDefaultArgs<ExtArgs>
   Evento?: boolean | Prisma.EventoDefaultArgs<ExtArgs>
+  Staff?: boolean | Prisma.AlumnoAsistioEvento$StaffArgs<ExtArgs>
 }
 
 export type $AlumnoAsistioEventoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -598,12 +792,15 @@ export type $AlumnoAsistioEventoPayload<ExtArgs extends runtime.Types.Extensions
   objects: {
     Alumno: Prisma.$AlumnoPayload<ExtArgs>
     Evento: Prisma.$EventoPayload<ExtArgs>
+    Staff: Prisma.$StaffPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    idAsistencia: number
     matricula: string
     idEvento: number
     fecha_llegada: Date
     fecha_salida: Date | null
+    staffID: number | null
   }, ExtArgs["result"]["alumnoAsistioEvento"]>
   composites: {}
 }
@@ -687,8 +884,8 @@ export interface AlumnoAsistioEventoDelegate<ExtArgs extends runtime.Types.Exten
    * // Get first 10 AlumnoAsistioEventos
    * const alumnoAsistioEventos = await prisma.alumnoAsistioEvento.findMany({ take: 10 })
    * 
-   * // Only select the `matricula`
-   * const alumnoAsistioEventoWithMatriculaOnly = await prisma.alumnoAsistioEvento.findMany({ select: { matricula: true } })
+   * // Only select the `idAsistencia`
+   * const alumnoAsistioEventoWithIdAsistenciaOnly = await prisma.alumnoAsistioEvento.findMany({ select: { idAsistencia: true } })
    * 
    */
   findMany<T extends AlumnoAsistioEventoFindManyArgs>(args?: Prisma.SelectSubset<T, AlumnoAsistioEventoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlumnoAsistioEventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -946,6 +1143,7 @@ export interface Prisma__AlumnoAsistioEventoClient<T, Null = never, ExtArgs exte
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Alumno<T extends Prisma.AlumnoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AlumnoDefaultArgs<ExtArgs>>): Prisma.Prisma__AlumnoClient<runtime.Types.Result.GetResult<Prisma.$AlumnoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Evento<T extends Prisma.EventoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventoDefaultArgs<ExtArgs>>): Prisma.Prisma__EventoClient<runtime.Types.Result.GetResult<Prisma.$EventoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  Staff<T extends Prisma.AlumnoAsistioEvento$StaffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AlumnoAsistioEvento$StaffArgs<ExtArgs>>): Prisma.Prisma__StaffClient<runtime.Types.Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -975,10 +1173,12 @@ export interface Prisma__AlumnoAsistioEventoClient<T, Null = never, ExtArgs exte
  * Fields of the AlumnoAsistioEvento model
  */
 export interface AlumnoAsistioEventoFieldRefs {
+  readonly idAsistencia: Prisma.FieldRef<"AlumnoAsistioEvento", 'Int'>
   readonly matricula: Prisma.FieldRef<"AlumnoAsistioEvento", 'String'>
   readonly idEvento: Prisma.FieldRef<"AlumnoAsistioEvento", 'Int'>
   readonly fecha_llegada: Prisma.FieldRef<"AlumnoAsistioEvento", 'DateTime'>
   readonly fecha_salida: Prisma.FieldRef<"AlumnoAsistioEvento", 'DateTime'>
+  readonly staffID: Prisma.FieldRef<"AlumnoAsistioEvento", 'Int'>
 }
     
 
@@ -1323,6 +1523,25 @@ export type AlumnoAsistioEventoDeleteManyArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many AlumnoAsistioEventos to delete.
    */
   limit?: number
+}
+
+/**
+ * AlumnoAsistioEvento.Staff
+ */
+export type AlumnoAsistioEvento$StaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Staff
+   */
+  select?: Prisma.StaffSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Staff
+   */
+  omit?: Prisma.StaffOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffInclude<ExtArgs> | null
+  where?: Prisma.StaffWhereInput
 }
 
 /**
