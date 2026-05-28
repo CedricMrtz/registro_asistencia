@@ -1,28 +1,26 @@
 import { prisma } from "@/lib/prisma";
 import { AssistanceResult, AssistanceType } from "@/types/assistance.types";
-
-const VALID_TYPES: AssistanceType[] = ["Entrada", "Salida"];
-
-function isValidAssistanceType(type: string): type is AssistanceType {
-  return VALID_TYPES.includes(type as AssistanceType);
-}
+import { isValidAssistanceType } from "@/utils/assistance.utils";
+import { getSqlServerErrorNumber } from "@/utils/sqlServer.utils";
 
 async function getStudentName(matricula: string): Promise<string | undefined> {
-  const student = await prisma.alumno.findUnique({
-    where: { matricula },
-    select: { nombre: true },
-  });
+  const rows = await prisma.$queryRaw<{ nombre: string }[]>`
+    SELECT nombre
+    FROM Alumno
+    WHERE matricula = ${matricula}
+  `;
 
-  return student?.nombre;
+  return rows[0]?.nombre;
 }
 
 async function ensureEventExists(eventId: number): Promise<boolean> {
-  const event = await prisma.evento.findUnique({
-    where: { idEvento: eventId },
-    select: { idEvento: true },
-  });
+  const rows = await prisma.$queryRaw<{ idEvento: number }[]>`
+    SELECT idEvento
+    FROM Evento
+    WHERE idEvento = ${eventId}
+  `;
 
-  return Boolean(event);
+  return rows.length > 0;
 }
 
 export async function registerAssistance(
@@ -55,15 +53,15 @@ export async function registerAssistance(
     return { success: false, matricula, reason: "Matricula no encontrada" };
   }
 
-  const lastRecord = await prisma.alumnoAsistioEvento.findFirst({
-    where: {
-      matricula,
-      idEvento: eventId,
-    },
-    orderBy: {
-      idAsistencia: "desc",
-    },
-  });
+  const lastRecords = await prisma.$queryRaw<
+    { idAsistencia: number; fecha_salida: Date | null }[]
+  >`
+    SELECT TOP 1 idAsistencia, fecha_salida
+    FROM AlumnoAsistioEvento
+    WHERE matricula = ${matricula} AND idEvento = ${eventId}
+    ORDER BY idAsistencia DESC
+  `;
+  const lastRecord = lastRecords[0];
 
   if (type === "Entrada") {
     if (lastRecord && !lastRecord.fecha_salida) {
@@ -76,19 +74,24 @@ export async function registerAssistance(
     }
 
     try {
-      await prisma.alumnoAsistioEvento.create({
-        data: {
-          matricula,
-          idEvento: eventId,
-          fecha_llegada: new Date(),
-        },
-      });
-    } catch (error) {
-      const code = error && typeof error === "object" && "code" in error
-        ? String((error as { code?: string }).code)
-        : "";
+      const inserted = await prisma.$queryRaw<{ idAsistencia: number }[]>`
+        INSERT INTO AlumnoAsistioEvento (matricula, idEvento, fecha_llegada)
+        OUTPUT inserted.idAsistencia
+        VALUES (${matricula}, ${eventId}, ${new Date()})
+      `;
 
-      if (code === "P2003" || code === "P2025") {
+      if (inserted.length === 0) {
+        return {
+          success: false,
+          matricula,
+          studentName,
+          reason: "No se pudo registrar la entrada",
+        };
+      }
+    } catch (error) {
+      const sqlErrorNumber = getSqlServerErrorNumber(error);
+
+      if (sqlErrorNumber === 547) {
         return {
           success: false,
           matricula,
@@ -113,20 +116,25 @@ export async function registerAssistance(
   }
 
   try {
-    await prisma.alumnoAsistioEvento.update({
-      where: {
-        idAsistencia: lastRecord.idAsistencia,
-      },
-      data: {
-        fecha_salida: new Date(),
-      },
-    });
-  } catch (error) {
-    const code = error && typeof error === "object" && "code" in error
-      ? String((error as { code?: string }).code)
-      : "";
+    const updated = await prisma.$queryRaw<{ idAsistencia: number }[]>`
+      UPDATE AlumnoAsistioEvento
+      SET fecha_salida = ${new Date()}
+      OUTPUT inserted.idAsistencia
+      WHERE idAsistencia = ${lastRecord.idAsistencia}
+    `;
 
-    if (code === "P2025") {
+    if (updated.length === 0) {
+      return {
+        success: false,
+        matricula,
+        studentName,
+        reason: "No se pudo registrar la salida",
+      };
+    }
+  } catch (error) {
+    const sqlErrorNumber = getSqlServerErrorNumber(error);
+
+    if (sqlErrorNumber === 547) {
       return {
         success: false,
         matricula,
@@ -151,13 +159,20 @@ export async function getEventAnalytics(eventId: number): Promise<{
   }
 
   const [entradas, salidas] = await Promise.all([
-    prisma.alumnoAsistioEvento.count({
-      where: { idEvento: eventId },
-    }),
-    prisma.alumnoAsistioEvento.count({
-      where: { idEvento: eventId, fecha_salida: { not: null } },
-    }),
+    prisma.$queryRaw<{ total: number }[]>`
+      SELECT COUNT(*) AS total
+      FROM AlumnoAsistioEvento
+      WHERE idEvento = ${eventId}
+    `,
+    prisma.$queryRaw<{ total: number }[]>`
+      SELECT COUNT(*) AS total
+      FROM AlumnoAsistioEvento
+      WHERE idEvento = ${eventId} AND fecha_salida IS NOT NULL
+    `,
   ]);
 
-  return { entradas, salidas, total: entradas };
+  const entradasTotal = entradas[0]?.total ?? 0;
+  const salidasTotal = salidas[0]?.total ?? 0;
+
+  return { entradas: entradasTotal, salidas: salidasTotal, total: entradasTotal };
 }

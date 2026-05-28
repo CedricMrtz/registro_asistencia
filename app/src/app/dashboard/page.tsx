@@ -2,13 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnalyticsSummary } from "@/components/AnalyticsSummary";
-import { EventSelector } from "@/components/EventSelector";
 import { FeedbackFeed } from "@/components/FeedbackFeed";
 import { MatriculaInput } from "@/components/MatriculaInput";
 import { ModeToggle } from "@/components/ModeToggle";
-import { SimposiumSelector } from "@/components/SimposiumSelector";
 import { useAssistances } from "@/hooks/useAssistances";
-import { getSimposiumsApi } from "@/services/simposiumApi.service";
+import { getActiveEventApi, getSimposiumsApi } from "@/services/simposiumApi.service";
 import {
   AssistanceFeedback,
   AssistanceType,
@@ -25,6 +23,9 @@ export default function DashboardPage() {
   const [feed, setFeed] = useState<AssistanceFeedback[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [simposiumError, setSimposiumError] = useState<string | null>(null);
+  const [activeEventError, setActiveEventError] = useState<string | null>(null);
+  const [isLoadingActiveEvent, setIsLoadingActiveEvent] = useState(false);
+  const [isAutoEvent, setIsAutoEvent] = useState(false);
 
   const {
     analytics,
@@ -74,6 +75,52 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
+
+    const loadActiveEvent = async () => {
+      setIsLoadingActiveEvent(true);
+      setActiveEventError(null);
+
+      try {
+        const event = await getActiveEventApi();
+        if (!isMounted) {
+          return;
+        }
+
+        if (event) {
+          setSimposiumId(event.idSimposium);
+          setEventId(event.idEvento);
+          setIsAutoEvent(true);
+          return;
+        }
+
+        setIsAutoEvent(false);
+        setSimposiumId(null);
+        setEventId(null);
+        setActiveEventError("No hay evento activo");
+      } catch (err) {
+        if (isMounted) {
+          const message = err instanceof Error ? err.message : "Error al cargar evento activo";
+          setActiveEventError(message);
+          setIsAutoEvent(false);
+          setSimposiumId(null);
+          setEventId(null);
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingActiveEvent(false);
+        }
+      }
+    };
+
+    loadActiveEvent();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!eventId) {
       clearAnalytics();
       return;
@@ -82,9 +129,32 @@ export default function DashboardPage() {
     refreshAnalytics(eventId);
   }, [eventId, refreshAnalytics, clearAnalytics]);
 
-  const handleSimposiumChange = (nextId: number | null) => {
-    setSimposiumId(nextId);
-    setEventId(null);
+  const refreshActiveEvent = async () => {
+    setIsLoadingActiveEvent(true);
+    setActiveEventError(null);
+
+    try {
+      const event = await getActiveEventApi();
+      if (event) {
+        setSimposiumId(event.idSimposium);
+        setEventId(event.idEvento);
+        setIsAutoEvent(true);
+        return;
+      }
+
+      setIsAutoEvent(false);
+      setSimposiumId(null);
+      setEventId(null);
+      setActiveEventError("No hay evento activo");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Error al cargar evento activo";
+      setActiveEventError(message);
+      setIsAutoEvent(false);
+      setSimposiumId(null);
+      setEventId(null);
+    } finally {
+      setIsLoadingActiveEvent(false);
+    }
   };
 
   const handleRegister = async (matricula: string) => {
@@ -132,23 +202,29 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <section className="space-y-6 rounded-lg border border-stone-200 bg-white p-6 lg:col-span-1">
             <div className="space-y-4">
-              <SimposiumSelector
-                simposiums={simposiums}
-                value={simposiumId}
-                onChange={handleSimposiumChange}
-              />
+              <div className="space-y-2">
+                <label className="text-sm text-stone-700">Evento activo</label>
+                <div className="rounded-md border border-stone-200 bg-stone-50 px-3 py-2 text-sm text-stone-800">
+                  {eventId ? "Evento activo encontrado" : "Sin evento activo"}
+                </div>
+                <button
+                  type="button"
+                  onClick={refreshActiveEvent}
+                  className="h-9 w-full rounded-md border border-stone-200 bg-white text-sm text-stone-700 hover:bg-stone-50 disabled:opacity-50"
+                  disabled={isLoadingActiveEvent}
+                >
+                  {isLoadingActiveEvent ? "Actualizando..." : "Actualizar evento activo"}
+                </button>
+              </div>
               {isLoadingSimposiums && (
                 <p className="text-xs text-stone-500">Cargando simposios...</p>
               )}
               {simposiumError && (
                 <p className="text-xs text-rose-600">{simposiumError}</p>
               )}
-              <EventSelector
-                events={events}
-                value={eventId}
-                onChange={setEventId}
-                disabled={!simposiumId}
-              />
+              {activeEventError && (
+                <p className="text-xs text-rose-600">{activeEventError}</p>
+              )}
             </div>
 
             <ModeToggle mode={mode} onChange={setMode} />
