@@ -14,6 +14,7 @@ import {
   AssistanceType,
 } from "@/types/assistance.types";
 import { Simposium } from "@/types/simposium.types";
+import { DownloadBTn } from "@/components/ReportInfo/Index";
 
 export default function DashboardPage() {
   const [simposiums, setSimposiums] = useState<Simposium[]>([]);
@@ -120,6 +121,7 @@ export default function DashboardPage() {
             <h1 className="text-2xl font-semibold tracking-tight text-stone-800">
               Control de Asistencia
             </h1>
+            <DownloadBTn />
             <p className="text-sm text-stone-500">Panel de registro por evento</p>
           </div>
           <div className="text-sm text-stone-500">
