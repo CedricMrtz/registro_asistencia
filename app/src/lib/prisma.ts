@@ -32,6 +32,8 @@ export const prisma =
     adapter,
   });
 
+export const sqlPool = pool;
+
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
   globalForPrisma.pool = pool;
