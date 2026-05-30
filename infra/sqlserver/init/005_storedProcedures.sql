@@ -88,9 +88,8 @@ CREATE PROCEDURE sp_GetDatosCumplimiento @idSimposium INT AS BEGIN
         END AS porcentaje_asistencia
     FROM Alumno a
     INNER JOIN AlumnoInscritoSimposium ais ON a.matricula = ais.matricula
-    CROSS JOIN Evento ev
+    INNER JOIN Evento ev ON ev.idSimposium = @idSimposium
     WHERE ais.idSimposium = @idSimposium
-      AND ev.idSimposium = @idSimposium
     ORDER BY a.nombre ASC, ev.fecha_comienzo ASC;
 
     SELECT
