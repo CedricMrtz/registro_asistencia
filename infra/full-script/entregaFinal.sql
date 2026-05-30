@@ -429,8 +429,45 @@ CREATE PROCEDURE sp_GetDatosCumplimiento @idSimposium INT AS BEGIN
 END;
 GO
 
-
 -- 6
+USE master;
+GO
+
+CREATE LOGIN AdminEventos
+WITH PASSWORD = 'Admin123!';
+GO
+
+CREATE LOGIN StaffEventos
+WITH PASSWORD = 'Staff123!';
+GO
+
+USE Simposium;
+GO
+
+CREATE USER AdminEventos FOR LOGIN AdminEventos;
+CREATE USER StaffEventos FOR LOGIN StaffEventos;
+GO
+
+CREATE ROLE RolAdministrador;
+CREATE ROLE RolStaff;
+GO
+
+ALTER ROLE RolAdministrador ADD MEMBER AdminEventos;
+ALTER ROLE RolStaff ADD MEMBER StaffEventos;
+GO
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON Alumno TO RolAdministrador;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Evento TO RolAdministrador;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Simposium TO RolAdministrador;
+GRANT SELECT, INSERT, UPDATE, DELETE ON AlumnoAsistioEvento TO RolAdministrador;
+
+GRANT SELECT ON Alumno TO RolStaff;
+GRANT SELECT ON Evento TO RolStaff;
+GRANT INSERT, UPDATE ON AlumnoAsistioEvento TO RolStaff;
+GO
+
+
+-- 7
 USE master;
 GO
 
@@ -446,7 +483,7 @@ EXEC sp_addumpdevice
     'C:\Backups\SimposiumDiff.bak';
 GO
 
--- 7
+-- 8
 BACKUP DATABASE Simposium
 TO SimposiumFullBackup
 WITH
@@ -462,7 +499,7 @@ WITH DIFFERENTIAL,
      NAME = 'Respaldo Diferencial Simposium';
 GO
 
--- 8
+-- 9
 -- RESTORE DATABASE Simposium
 -- FROM SimposiumFullBackup
 -- WITH REPLACE;
