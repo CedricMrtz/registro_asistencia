@@ -1,0 +1,4 @@
+RESTORE DATABASE Simposium
+FROM SimposiumFullBackup
+WITH REPLACE;
+GO
