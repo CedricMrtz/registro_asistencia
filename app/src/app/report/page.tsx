@@ -8,6 +8,31 @@ import { DatosCumplimientoResult } from "@/types/reportCumplimiento.types";
 
 type TabKey = "sp1" | "sp2";
 
+type PdfDoc = jsPDF & {
+	lastAutoTable?: {
+		finalY?: number;
+	};
+};
+
+function formatDisplayValue(value: string | number | Date | null | undefined): string {
+	if (value === null || value === undefined || value === "") {
+		return "-";
+	}
+
+	if (value instanceof Date) {
+		return value.toLocaleString("es-MX");
+	}
+
+	if (typeof value === "string") {
+		const parsedDate = new Date(value);
+		if (!Number.isNaN(parsedDate.getTime()) && value.includes("T")) {
+			return parsedDate.toLocaleString("es-MX");
+		}
+	}
+
+	return String(value);
+}
+
 export default function ReportPage() {
 	const [activeTab, setActiveTab] = useState<TabKey>("sp1");
 	const [idSimposiumInput, setIdSimposiumInput] = useState("1");
@@ -53,8 +78,18 @@ export default function ReportPage() {
 		}
 	}
 
+	function addTable(doc: PdfDoc, head: string[][], body: (string | number | boolean | null)[][]) {
+		autoTable(doc, {
+			startY: doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 8 : 22,
+			head,
+			body,
+			styles: { fontSize: 8 },
+			headStyles: { fillColor: [17, 24, 39] },
+		});
+	}
+
 	function descargarPdf() {
-		const doc = new jsPDF();
+		const doc = new jsPDF() as PdfDoc;
 
 		if (activeTab === "sp1") {
 			if (!asistenciaData) {
@@ -66,26 +101,45 @@ export default function ReportPage() {
 
 			autoTable(doc, {
 				startY: 22,
-				head: [["Matricula", "Nombre", "Carrera", "Escuela"]],
+				head: [["Matricula", "Nombre", "Telefono", "Semestre", "Email", "Carrera", "Siglas", "Escuela", "Ciudad"]],
 				body: asistenciaData.alumnosInscritos.map((row) => [
 					row.matricula,
 					row.nombre,
+					formatDisplayValue(row.telefono),
+					formatDisplayValue(row.semestre),
+					formatDisplayValue(row.email),
+					row.nombre_carrera,
 					row.siglas,
 					row.nombre_escuela,
+					row.ciudad,
 				]),
 			});
 
 			autoTable(doc, {
-				startY: (doc as jsPDF & { lastAutoTable?: { finalY?: number } }).lastAutoTable
-					?.finalY
-					? ((doc as jsPDF & { lastAutoTable?: { finalY?: number } }).lastAutoTable
-							?.finalY ?? 22) + 8
-					: 100,
-				head: [["Matricula", "Evento", "Minutos"]],
+				startY: doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 8 : 100,
+				head: [["ID Asistencia", "Matricula", "ID Evento", "Evento", "Llegada", "Salida", "Staff", "Minutos"]],
 				body: asistenciaData.asistenciasPorEvento.map((row) => [
+					row.idAsistencia,
 					row.matricula,
+					row.idEvento,
 					row.nombreEvento,
-					String(row.minutos_asistido),
+					formatDisplayValue(row.fecha_llegada),
+					formatDisplayValue(row.fecha_salida),
+					formatDisplayValue(row.staffID),
+					row.minutos_asistido,
+				]),
+			});
+
+			autoTable(doc, {
+				startY: doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 8 : 100,
+				head: [["ID Evento", "Nombre", "Inicio", "Fin", "ID Simposium", "Tipo"]],
+				body: asistenciaData.eventosDelSimposium.map((row) => [
+					row.idEvento,
+					row.nombreEvento,
+					formatDisplayValue(row.fecha_comienzo),
+					formatDisplayValue(row.fecha_acabado),
+					row.idSimposium,
+					row.nombreTipo,
 				]),
 			});
 
@@ -102,12 +156,45 @@ export default function ReportPage() {
 
 		autoTable(doc, {
 			startY: 22,
-			head: [["Matricula", "Evento", "Asistencia (%)", "Minutos"]],
+			head: [["Matricula", "Nombre", "Telefono", "Semestre", "Email", "Carrera", "Siglas", "Escuela", "Ciudad"]],
+			body: cumplimientoData.alumnosInscritos.map((row) => [
+				row.matricula,
+				row.nombre,
+				formatDisplayValue(row.telefono),
+				formatDisplayValue(row.semestre),
+				formatDisplayValue(row.email),
+				row.nombre_carrera,
+				row.siglas,
+				row.nombre_escuela,
+				row.ciudad,
+			]),
+		});
+
+		autoTable(doc, {
+			startY: doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 8 : 100,
+			head: [["Matricula", "ID Evento", "Evento", "Inicio", "Fin", "Duracion", "Minutos", "% Asistencia"]],
 			body: cumplimientoData.cumplimientoPorEvento.map((row) => [
 				row.matricula,
+				row.idEvento,
 				row.nombreEvento,
-				String(row.porcentaje_asistencia),
-				String(row.minutos_asistido),
+				formatDisplayValue(row.fecha_comienzo),
+				formatDisplayValue(row.fecha_acabado),
+				row.duracion_evento_min,
+				row.minutos_asistido,
+				row.porcentaje_asistencia,
+			]),
+		});
+
+		autoTable(doc, {
+			startY: doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 8 : 100,
+			head: [["ID Evento", "Nombre", "Inicio", "Fin", "ID Simposium", "Tipo"]],
+			body: cumplimientoData.eventosDelSimposium.map((row) => [
+				row.idEvento,
+				row.nombreEvento,
+				formatDisplayValue(row.fecha_comienzo),
+				formatDisplayValue(row.fecha_acabado),
+				row.idSimposium,
+				row.nombreTipo,
 			]),
 		});
 
@@ -186,8 +273,13 @@ export default function ReportPage() {
 									<tr className="bg-blue-50">
 										<th className="border px-2 py-1 text-left">Matricula</th>
 										<th className="border px-2 py-1 text-left">Nombre</th>
+										<th className="border px-2 py-1 text-left">Telefono</th>
+										<th className="border px-2 py-1 text-left">Semestre</th>
+										<th className="border px-2 py-1 text-left">Email</th>
 										<th className="border px-2 py-1 text-left">Carrera</th>
+										<th className="border px-2 py-1 text-left">Siglas</th>
 										<th className="border px-2 py-1 text-left">Escuela</th>
+										<th className="border px-2 py-1 text-left">Ciudad</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -195,8 +287,13 @@ export default function ReportPage() {
 										<tr key={`${row.matricula}-${row.nombre}`}>
 											<td className="border px-2 py-1">{row.matricula}</td>
 											<td className="border px-2 py-1">{row.nombre}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.telefono)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.semestre)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.email)}</td>
+											<td className="border px-2 py-1">{row.nombre_carrera}</td>
 											<td className="border px-2 py-1">{row.siglas}</td>
 											<td className="border px-2 py-1">{row.nombre_escuela}</td>
+											<td className="border px-2 py-1">{row.ciudad}</td>
 										</tr>
 									))}
 								</tbody>
@@ -210,17 +307,57 @@ export default function ReportPage() {
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
 									<tr className="bg-blue-50">
+										<th className="border px-2 py-1 text-left">ID Asistencia</th>
 										<th className="border px-2 py-1 text-left">Matricula</th>
+										<th className="border px-2 py-1 text-left">ID Evento</th>
 										<th className="border px-2 py-1 text-left">Evento</th>
+										<th className="border px-2 py-1 text-left">Llegada</th>
+										<th className="border px-2 py-1 text-left">Salida</th>
+										<th className="border px-2 py-1 text-left">Staff</th>
 										<th className="border px-2 py-1 text-left">Minutos asistido</th>
 									</tr>
 								</thead>
 								<tbody>
 									{(asistenciaData?.asistenciasPorEvento ?? []).map((row) => (
 										<tr key={`${row.idAsistencia}-${row.matricula}`}>
+											<td className="border px-2 py-1">{row.idAsistencia}</td>
 											<td className="border px-2 py-1">{row.matricula}</td>
+											<td className="border px-2 py-1">{row.idEvento}</td>
 											<td className="border px-2 py-1">{row.nombreEvento}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_llegada)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_salida)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.staffID)}</td>
 											<td className="border px-2 py-1">{row.minutos_asistido}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div className="rounded border border-blue-200 p-4">
+						<h2 className="mb-2 font-medium text-blue-800">SP1: Eventos del simposium</h2>
+						<div className="overflow-auto">
+							<table className="min-w-full border-collapse text-sm">
+								<thead>
+									<tr className="bg-blue-50">
+										<th className="border px-2 py-1 text-left">ID Evento</th>
+										<th className="border px-2 py-1 text-left">Nombre</th>
+										<th className="border px-2 py-1 text-left">Inicio</th>
+										<th className="border px-2 py-1 text-left">Fin</th>
+										<th className="border px-2 py-1 text-left">ID Simposium</th>
+										<th className="border px-2 py-1 text-left">Tipo</th>
+									</tr>
+								</thead>
+								<tbody>
+									{(asistenciaData?.eventosDelSimposium ?? []).map((row) => (
+										<tr key={row.idEvento}>
+											<td className="border px-2 py-1">{row.idEvento}</td>
+											<td className="border px-2 py-1">{row.nombreEvento}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_comienzo)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_acabado)}</td>
+											<td className="border px-2 py-1">{row.idSimposium}</td>
+											<td className="border px-2 py-1">{row.nombreTipo}</td>
 										</tr>
 									))}
 								</tbody>
@@ -229,29 +366,105 @@ export default function ReportPage() {
 					</div>
 				</section>
 			) : (
-				<section className="rounded border border-emerald-200 p-4">
-					<h2 className="mb-2 font-medium text-emerald-800">SP2: Cumplimiento por evento</h2>
-					<div className="overflow-auto">
-						<table className="min-w-full border-collapse text-sm">
-							<thead>
-								<tr className="bg-emerald-50">
-									<th className="border px-2 py-1 text-left">Matricula</th>
-									<th className="border px-2 py-1 text-left">Evento</th>
-									<th className="border px-2 py-1 text-left">Asistencia (%)</th>
-									<th className="border px-2 py-1 text-left">Minutos asistido</th>
-								</tr>
-							</thead>
-							<tbody>
-								{(cumplimientoData?.cumplimientoPorEvento ?? []).map((row) => (
-									<tr key={`${row.matricula}-${row.idEvento}`}>
-										<td className="border px-2 py-1">{row.matricula}</td>
-										<td className="border px-2 py-1">{row.nombreEvento}</td>
-										<td className="border px-2 py-1">{row.porcentaje_asistencia}</td>
-										<td className="border px-2 py-1">{row.minutos_asistido}</td>
+				<section className="space-y-5">
+					<div className="rounded border border-emerald-200 p-4">
+						<h2 className="mb-2 font-medium text-emerald-800">SP2: Alumnos inscritos</h2>
+						<div className="overflow-auto">
+							<table className="min-w-full border-collapse text-sm">
+								<thead>
+									<tr className="bg-emerald-50">
+										<th className="border px-2 py-1 text-left">Matricula</th>
+										<th className="border px-2 py-1 text-left">Nombre</th>
+										<th className="border px-2 py-1 text-left">Telefono</th>
+										<th className="border px-2 py-1 text-left">Semestre</th>
+										<th className="border px-2 py-1 text-left">Email</th>
+										<th className="border px-2 py-1 text-left">Carrera</th>
+										<th className="border px-2 py-1 text-left">Siglas</th>
+										<th className="border px-2 py-1 text-left">Escuela</th>
+										<th className="border px-2 py-1 text-left">Ciudad</th>
 									</tr>
-								))}
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									{(cumplimientoData?.alumnosInscritos ?? []).map((row) => (
+										<tr key={`${row.matricula}-${row.nombre}`}>
+											<td className="border px-2 py-1">{row.matricula}</td>
+											<td className="border px-2 py-1">{row.nombre}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.telefono)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.semestre)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.email)}</td>
+											<td className="border px-2 py-1">{row.nombre_carrera}</td>
+											<td className="border px-2 py-1">{row.siglas}</td>
+											<td className="border px-2 py-1">{row.nombre_escuela}</td>
+											<td className="border px-2 py-1">{row.ciudad}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div className="rounded border border-emerald-200 p-4">
+						<h2 className="mb-2 font-medium text-emerald-800">SP2: Cumplimiento por evento</h2>
+						<div className="overflow-auto">
+							<table className="min-w-full border-collapse text-sm">
+								<thead>
+									<tr className="bg-emerald-50">
+										<th className="border px-2 py-1 text-left">Matricula</th>
+										<th className="border px-2 py-1 text-left">ID Evento</th>
+										<th className="border px-2 py-1 text-left">Evento</th>
+										<th className="border px-2 py-1 text-left">Inicio</th>
+										<th className="border px-2 py-1 text-left">Fin</th>
+										<th className="border px-2 py-1 text-left">Duracion</th>
+										<th className="border px-2 py-1 text-left">Minutos asistido</th>
+										<th className="border px-2 py-1 text-left">Asistencia (%)</th>
+									</tr>
+								</thead>
+								<tbody>
+									{(cumplimientoData?.cumplimientoPorEvento ?? []).map((row) => (
+										<tr key={`${row.matricula}-${row.idEvento}`}>
+											<td className="border px-2 py-1">{row.matricula}</td>
+											<td className="border px-2 py-1">{row.idEvento}</td>
+											<td className="border px-2 py-1">{row.nombreEvento}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_comienzo)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_acabado)}</td>
+											<td className="border px-2 py-1">{row.duracion_evento_min}</td>
+											<td className="border px-2 py-1">{row.minutos_asistido}</td>
+											<td className="border px-2 py-1">{row.porcentaje_asistencia}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div className="rounded border border-emerald-200 p-4">
+						<h2 className="mb-2 font-medium text-emerald-800">SP2: Eventos del simposium</h2>
+						<div className="overflow-auto">
+							<table className="min-w-full border-collapse text-sm">
+								<thead>
+									<tr className="bg-emerald-50">
+										<th className="border px-2 py-1 text-left">ID Evento</th>
+										<th className="border px-2 py-1 text-left">Nombre</th>
+										<th className="border px-2 py-1 text-left">Inicio</th>
+										<th className="border px-2 py-1 text-left">Fin</th>
+										<th className="border px-2 py-1 text-left">ID Simposium</th>
+										<th className="border px-2 py-1 text-left">Tipo</th>
+									</tr>
+								</thead>
+								<tbody>
+									{(cumplimientoData?.eventosDelSimposium ?? []).map((row) => (
+										<tr key={row.idEvento}>
+											<td className="border px-2 py-1">{row.idEvento}</td>
+											<td className="border px-2 py-1">{row.nombreEvento}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_comienzo)}</td>
+											<td className="border px-2 py-1">{formatDisplayValue(row.fecha_acabado)}</td>
+											<td className="border px-2 py-1">{row.idSimposium}</td>
+											<td className="border px-2 py-1">{row.nombreTipo}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</section>
 			)}

@@ -26,6 +26,7 @@ export interface SimposiumCumplimientoEventRow {
   nombreEvento: string;
   fecha_comienzo: Date;
   fecha_acabado: Date;
+  idSimposium: number;
   nombreTipo: string;
 }
 
