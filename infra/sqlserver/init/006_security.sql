@@ -26,6 +26,10 @@ GO
 
 GRANT EXECUTE ON dbo.EventoActivo TO RolAdministrador;
 GRANT EXECUTE ON dbo.EventoActivo TO RolStaff;
+GRANT EXECUTE ON dbo.sp_GetDatosAsistencia TO RolAdministrador;
+GRANT EXECUTE ON dbo.sp_GetDatosAsistencia TO RolStaff;
+GRANT EXECUTE ON dbo.sp_GetDatosCumplimiento TO RolAdministrador;
+GRANT EXECUTE ON dbo.sp_GetDatosCumplimiento TO RolStaff;
 GO
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Alumno TO RolAdministrador;

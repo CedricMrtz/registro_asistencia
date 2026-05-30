@@ -6,12 +6,12 @@ import {
   StudentCumplimientoRow,
 } from "@/types/reportCumplimiento.types";
 
-const connectionConfig: sql.config = {
+const connectionConfig = {
   server: process.env.MSSQL_HOST!,
   port: Number(process.env.MSSQL_PORT) || 1433,
   database: process.env.MSSQL_DATABASE!,
-  user: "sa",
-  password: process.env.MSSQL_SA_PASSWORD!,
+  user: process.env.MSSQL_USER!,
+  password: process.env.MSSQL_PASSWORD!,
   options: {
     trustServerCertificate: true,
   },
