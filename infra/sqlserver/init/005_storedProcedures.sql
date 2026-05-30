@@ -82,9 +82,8 @@ CREATE PROCEDURE sp_GetDatosCumplimiento @idSimposium INT AS BEGIN
             ELSE CAST(
                 ROUND(
                     CAST(dbo.TiempoEnEvento(a.matricula, ev.idEvento) AS FLOAT)
-                    / DATEDIFF(MINUTE, ev.fecha_comienzo, ev.fecha_acabado)
-                    * 100,
-                0) AS INT)
+                    / DATEDIFF(MINUTE, ev.fecha_comienzo, ev.fecha_acabado) * 100,0)
+                AS INT)
         END AS porcentaje_asistencia
     FROM Alumno a
     INNER JOIN AlumnoInscritoSimposium ais ON a.matricula = ais.matricula
