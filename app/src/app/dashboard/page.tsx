@@ -44,6 +44,35 @@ export default function DashboardPage() {
   const events = useMemo(() => selectedSimposium?.Evento ?? [], [selectedSimposium]);
 
   useEffect(() => {
+    if (!simposiumId) {
+      setEventId(null);
+      return;
+    }
+
+    const currentEventExists = selectedSimposium?.Evento.some(
+      (item) => item.idEvento === eventId
+    );
+
+    if (!currentEventExists) {
+      setEventId(selectedSimposium?.Evento[0]?.idEvento ?? null);
+    }
+  }, [eventId, selectedSimposium, simposiumId]);
+
+  const handleSimposiumChange = (value: string) => {
+    const nextSimposiumId = value ? Number(value) : null;
+    setSimposiumId(Number.isInteger(nextSimposiumId) ? nextSimposiumId : null);
+    setIsAutoEvent(false);
+    setActiveEventError(null);
+  };
+
+  const handleEventChange = (value: string) => {
+    const nextEventId = value ? Number(value) : null;
+    setEventId(Number.isInteger(nextEventId) ? nextEventId : null);
+    setIsAutoEvent(false);
+    setActiveEventError(null);
+  };
+
+  useEffect(() => {
     let isMounted = true;
 
     const loadSimposiums = async () => {
@@ -205,7 +234,11 @@ export default function DashboardPage() {
               <div className="space-y-2">
                 <label className="text-sm text-stone-700">Evento activo</label>
                 <div className="rounded-md border border-stone-200 bg-stone-50 px-3 py-2 text-sm text-stone-800">
-                  {eventId ? "Evento activo encontrado" : "Sin evento activo"}
+                  {eventId
+                    ? isAutoEvent
+                      ? "Evento activo encontrado"
+                      : "Evento seleccionado manualmente"
+                    : "Sin evento activo"}
                 </div>
                 <button
                   type="button"
@@ -216,6 +249,47 @@ export default function DashboardPage() {
                   {isLoadingActiveEvent ? "Actualizando..." : "Actualizar evento activo"}
                 </button>
               </div>
+
+              <div className="space-y-2">
+                <label className="text-sm text-stone-700" htmlFor="simposium-select">
+                  Simposium
+                </label>
+                <select
+                  id="simposium-select"
+                  value={simposiumId ?? ""}
+                  onChange={(event) => handleSimposiumChange(event.target.value)}
+                  className="h-10 w-full rounded-md border border-stone-200 bg-white px-3 text-sm text-stone-800"
+                  disabled={isLoadingSimposiums || simposiums.length === 0}
+                >
+                  <option value="">Selecciona un simposium</option>
+                  {simposiums.map((simposium) => (
+                    <option key={simposium.idSimposium} value={simposium.idSimposium}>
+                      {simposium.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm text-stone-700" htmlFor="event-select">
+                  Evento
+                </label>
+                <select
+                  id="event-select"
+                  value={eventId ?? ""}
+                  onChange={(event) => handleEventChange(event.target.value)}
+                  className="h-10 w-full rounded-md border border-stone-200 bg-white px-3 text-sm text-stone-800"
+                  disabled={!selectedSimposium || events.length === 0}
+                >
+                  <option value="">Selecciona un evento</option>
+                  {events.map((item) => (
+                    <option key={item.idEvento} value={item.idEvento}>
+                      {item.nombreEvento}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {isLoadingSimposiums && (
                 <p className="text-xs text-stone-500">Cargando simposios...</p>
               )}
