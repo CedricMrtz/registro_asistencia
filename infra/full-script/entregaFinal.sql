@@ -177,9 +177,7 @@ GO
 USE SIMPOSIUM;
 GO
 
-CREATE FUNCTION dbo.EventoActivo()
-RETURNS INT
-AS BEGIN
+CREATE FUNCTION dbo.EventoActivo() RETURNS INT AS BEGIN
   DECLARE @idEvento INT;
 
   SELECT TOP 1 @idEvento = idEvento
@@ -191,9 +189,7 @@ AS BEGIN
 END;
 GO
 
-CREATE FUNCTION dbo.TiempoEnEvento(@MATRICULA VARCHAR(15), @idEvento INT)
-RETURNS INT
-AS BEGIN
+CREATE FUNCTION dbo.TiempoEnEvento(@MATRICULA VARCHAR(15), @idEvento INT) RETURNS INT AS BEGIN
   DECLARE @TIEMPO INT;
 
   SELECT @TIEMPO = DATEDIFF(MINUTE, FECHA_LLEGADA, ISNULL(FECHA_SALIDA, GETDATE()))
@@ -204,13 +200,12 @@ AS BEGIN
 END;
 GO
 
-CREATE TRIGGER dbo.FechaLlegada ON ALUMNOASISTIOEVENTO AFTER INSERT
-AS BEGIN
-  UPDATE target
-  SET FECHA_LLEGADA = ISNULL(target.FECHA_LLEGADA, GETDATE())
-  FROM ALUMNOASISTIOEVENTO AS target
+CREATE TRIGGER dbo.FechaLlegada ON ALUMNOASISTIOEVENTO AFTER INSERT AS BEGIN
+  UPDATE AAE
+  SET FECHA_LLEGADA = ISNULL(AAE.FECHA_LLEGADA, GETDATE())
+  FROM ALUMNOASISTIOEVENTO AS AAE
   INNER JOIN inserted AS src
-    ON target.idAsistencia = src.idAsistencia;
+    ON AAE.idAsistencia = src.idAsistencia;
 END;
 GO
 
@@ -412,15 +407,13 @@ CREATE PROCEDURE sp_GetDatosCumplimiento @idSimposium INT AS BEGIN
             ELSE CAST(
                 ROUND(
                     CAST(dbo.TiempoEnEvento(a.matricula, ev.idEvento) AS FLOAT)
-                    / DATEDIFF(MINUTE, ev.fecha_comienzo, ev.fecha_acabado)
-                    * 100,
-                0) AS INT)
+                    / DATEDIFF(MINUTE, ev.fecha_comienzo, ev.fecha_acabado) * 100,0)
+                AS INT)
         END AS porcentaje_asistencia
     FROM Alumno a
     INNER JOIN AlumnoInscritoSimposium ais ON a.matricula = ais.matricula
-    CROSS JOIN Evento ev
+    INNER JOIN Evento ev ON ev.idSimposium = @idSimposium
     WHERE ais.idSimposium = @idSimposium
-      AND ev.idSimposium = @idSimposium
     ORDER BY a.nombre ASC, ev.fecha_comienzo ASC;
 
     SELECT
