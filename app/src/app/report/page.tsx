@@ -249,7 +249,7 @@ export default function ReportPage() {
 							: "border border-blue-600 text-blue-700"
 					}`}
 				>
-					Stored Procedure 1 - Asistencia
+					Asistencia
 				</button>
 				<button
 					onClick={() => setActiveTab("sp2")}
@@ -259,14 +259,14 @@ export default function ReportPage() {
 							: "border border-emerald-600 text-emerald-700"
 					}`}
 				>
-					Stored Procedure 2 - Cumplimiento
+					Cumplimiento
 				</button>
 			</section>
 
 			{activeTab === "sp1" ? (
 				<section className="space-y-5">
 					<div className="rounded border border-blue-200 p-4">
-						<h2 className="mb-2 font-medium text-blue-800">SP1: Alumnos inscritos</h2>
+						<h2 className="mb-2 font-medium text-blue-800">Alumnos inscritos</h2>
 						<div className="overflow-auto">
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
@@ -302,7 +302,7 @@ export default function ReportPage() {
 					</div>
 
 					<div className="rounded border border-blue-200 p-4">
-						<h2 className="mb-2 font-medium text-blue-800">SP1: Asistencias por evento</h2>
+						<h2 className="mb-2 font-medium text-blue-800">Asistencias</h2>
 						<div className="overflow-auto">
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
@@ -336,7 +336,7 @@ export default function ReportPage() {
 					</div>
 
 					<div className="rounded border border-blue-200 p-4">
-						<h2 className="mb-2 font-medium text-blue-800">SP1: Eventos del simposium</h2>
+						<h2 className="mb-2 font-medium text-blue-800">Eventos</h2>
 						<div className="overflow-auto">
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
@@ -368,7 +368,7 @@ export default function ReportPage() {
 			) : (
 				<section className="space-y-5">
 					<div className="rounded border border-emerald-200 p-4">
-						<h2 className="mb-2 font-medium text-emerald-800">SP2: Alumnos inscritos</h2>
+						<h2 className="mb-2 font-medium text-emerald-800">Alumnos</h2>
 						<div className="overflow-auto">
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
@@ -404,7 +404,7 @@ export default function ReportPage() {
 					</div>
 
 					<div className="rounded border border-emerald-200 p-4">
-						<h2 className="mb-2 font-medium text-emerald-800">SP2: Cumplimiento por evento</h2>
+						<h2 className="mb-2 font-medium text-emerald-800">Cumplimiento por evento</h2>
 						<div className="overflow-auto">
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
@@ -438,7 +438,7 @@ export default function ReportPage() {
 					</div>
 
 					<div className="rounded border border-emerald-200 p-4">
-						<h2 className="mb-2 font-medium text-emerald-800">SP2: Eventos del simposium</h2>
+						<h2 className="mb-2 font-medium text-emerald-800">Eventos</h2>
 						<div className="overflow-auto">
 							<table className="min-w-full border-collapse text-sm">
 								<thead>
