@@ -76,8 +76,10 @@ export async function registerAssistance(
     try {
       const inserted = await prisma.$queryRaw<{ idAsistencia: number }[]>`
         INSERT INTO AlumnoAsistioEvento (matricula, idEvento, fecha_llegada)
-        OUTPUT inserted.idAsistencia
         VALUES (${matricula}, ${eventId}, ${new Date()})
+
+        SELECT CAST(SCOPE_IDENTITY() AS INT) AS idAsistencia;
+
       `;
 
       if (inserted.length === 0) {
